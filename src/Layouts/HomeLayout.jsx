@@ -1,27 +1,19 @@
-import React from "react"
-import { Outlet, NavLink } from "react-router-dom"
+import React from "react";
+import { Outlet } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
-import Sidebar from '../Components/Sidebar';
+import Sidebar from "../Components/Sidebar";
 
 
 export default function HomeLayout() {
-
-
-    return (
-        <>
-
-            <div className="bg-gray-100 min-h-screen flex flex-col">
-                <Header></Header>
-                <Sidebar></Sidebar>
-                <main>
-                    <Outlet />
-                </main>
-                <Footer></Footer>
-
-
-
-            </div>
-        </>
-    )
+  return (
+    <div className="bg-gray-100 min-h-screen flex flex-col">
+      <Header />
+      <Sidebar />
+      <main className="flex-1 mt-10"> {/* Ajusta el margen superior aquí */}
+        <Outlet />
+      </main>
+      <Footer ></Footer>
+      </div>
+  );
 }
