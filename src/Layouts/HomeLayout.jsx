@@ -8,9 +8,11 @@ import Sidebar from "../Components/Sidebar";
 export default function HomeLayout() {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">
+      <div className="bg-black">
       <Header />
       <Sidebar />
-      <main className="flex-1 mt-10"> {/* Ajusta el margen superior aquí */}
+      </div>
+      <main className="flex-1 mt-1"> {/* Ajusta el margen superior aquí */}
         <Outlet />
       </main>
       <Footer ></Footer>

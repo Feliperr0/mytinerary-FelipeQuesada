@@ -50,44 +50,67 @@ const cities = [
     city: "Mexico City",
     flag: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg",
     touristAttractions: ["Zócalo", "Chapultepec Park"]
+  },
+  {
+    country: "USA",
+    city: "New York",
+    flag: "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
+    touristAttractions: ["Statue of Liberty", "Central Park"]
+  },
+  {
+    country: "Italy",
+    city: "Rome",
+    flag: "https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg",
+    touristAttractions: ["Colosseum", "Vatican City"]
+  },
+  {
+    country: "UK",
+    city: "London",
+    flag: "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg",
+    touristAttractions: ["Big Ben", "London Eye"]
+  },
+  {
+    country: "Spain",
+    city: "Barcelona",
+    flag: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
+    touristAttractions: ["Sagrada Familia", "Park Güell"]
+  },
+  {
+    country: "China",
+    city: "Beijing",
+    flag: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Flag_of_China.svg",
+    touristAttractions: ["Great Wall of China", "Forbidden City"]
+  },
+  {
+    country: "Russia",
+    city: "Moscow",
+    flag: "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
+    touristAttractions: ["Red Square", "Kremlin"]
   }
 ];
 
+const createSlides = () => {
+  const slides = [];
+  for (let i = 0; i < cities.length; i += 4) {
+    slides.push(
+      <div key={i} className="">
+        {cities.slice(i, i + 4).map(city => (
+          <Card className="" key={city.city} city={city} />
+        ))}
+      </div>
+    );
+  }
+  return slides;
+};
+
 export default function Carousel() {
   return (
-    <Slider {...settings}>
-      {/* Primera transición */}
-      <div className="flex justify-between">
-        <div className="w-1/2 relative">
-          <img src={cities[0].flag} alt={cities[0].city} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">{cities[0].city}</div>
-        </div>
-        <div className="w-1/4 relative">
-          <img src={cities[1].flag} alt={cities[1].city} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">{cities[1].city}</div>
-        </div>
-        <div className="w-1/4 relative">
-          <img src={cities[2].flag} alt={cities[2].city} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">{cities[2].city}</div>
-        </div>
-      </div>
-
-      {/* Segunda transición */}
-      <div className="flex justify-center">
-        <div className="w-full relative">
-          <img src="promo.jpg" alt="Promotion" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold">Special Promotion</div>
-        </div>
-      </div>
-
-      {/* Tercera transición */}
-      <div className="flex justify-between">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-          {cities.slice(3).map(city => (
-            <Card key={city.city} city={city} />
-          ))}
-        </div>
-      </div>
-    </Slider>
+    <div>
+      <h2 className="text-3xl font-bold text-center mb-6">Popular Mytineraries</h2>
+      
+      <Slider  className='  bg-black'{...settings}>
+        {createSlides()}
+      </Slider>
+    </div>
   );
 }

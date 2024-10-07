@@ -5,15 +5,15 @@ import CTA from "../Components/CTA"; // Importa el componente CTA
 export default function Home() {
   return (
     <>
-      {/* Call to Action */}
-      <CTA />
-
-      {/* Carousel */}
-      <section className="py-10">
-        <div>
+      <main className="flex flex-col items-center">
+        <CTA />
+      </main>
+      <section className=" py-10 max-w-screen-xl mx-auto">
+        <div className=" px-4 sm:px-6 lg:px-8">
           <Carousel />
         </div>
       </section>
     </>
   );
 }
+
