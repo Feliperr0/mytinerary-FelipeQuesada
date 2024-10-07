@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from "react-slick";
 import Card from './Card';
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const settings = {
@@ -12,6 +12,20 @@ const settings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
+};
+
+const createSlides = () => {
+  const slides = [];
+  for (let i = 0; i < cities.length; i += 4) {
+    slides.push(
+      <div key={i} className=" w-5 bg-black">
+        {cities.slice(i, i + 4).map(city => (
+          <Card key={city.city} city={city} />
+        ))}
+      </div>
+    );
+  }
+  return slides;
 };
 
 const cities = [
@@ -85,32 +99,19 @@ const cities = [
     country: "Russia",
     city: "Moscow",
     flag: "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
-    touristAttractions: ["Red Square", "Kremlin"]
+    touristAttractions: ["Red Square",  "Kremlin"]
   }
 ];
 
-const createSlides = () => {
-  const slides = [];
-  for (let i = 0; i < cities.length; i += 4) {
-    slides.push(
-      <div key={i} className="">
-        {cities.slice(i, i + 4).map(city => (
-          <Card className="" key={city.city} city={city} />
-        ))}
-      </div>
-    );
-  }
-  return slides;
-};
-
 export default function Carousel() {
   return (
+    <>
     <div>
       <h2 className="text-3xl font-bold text-center mb-6">Popular Mytineraries</h2>
-      
-      <Slider  className='  bg-black'{...settings}>
+      <Slider {...settings}>
         {createSlides()}
       </Slider>
     </div>
+    </>
   );
 }

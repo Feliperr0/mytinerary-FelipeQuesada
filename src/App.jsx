@@ -43,9 +43,44 @@ const cities = [
     city: "Mexico City",
     flag: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg",
     touristAttractions: ["Zócalo", "Chapultepec Park"]
+  },
+  {
+    country: "USA",
+    city: "New York",
+    flag: "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
+    touristAttractions: ["Statue of Liberty", "Central Park"]
+  },
+  {
+    country: "Italy",
+    city: "Rome",
+    flag: "https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg",
+    touristAttractions: ["Colosseum", "Vatican City"]
+  },
+  {
+    country: "UK",
+    city: "London",
+    flag: "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg",
+    touristAttractions: ["Big Ben", "London Eye"]
+  },
+  {
+    country: "Spain",
+    city: "Barcelona",
+    flag: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
+    touristAttractions: ["Sagrada Familia", "Park Güell"]
+  },
+  {
+    country: "China",
+    city: "Beijing",
+    flag: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Flag_of_China.svg",
+    touristAttractions: ["Great Wall of China", "Forbidden City"]
+  },
+  {
+    country: "Russia",
+    city: "Moscow",
+    flag: "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
+    touristAttractions: ["Red Square",  "Kremlin"]
   }
 ];
-  
 
 
 const router = createBrowserRouter([
