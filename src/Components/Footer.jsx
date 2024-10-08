@@ -9,7 +9,7 @@ export default function Footer() {
                 <div className="mb-4 md:mb-0">
                     <h3 className="text-lg font-bold mb-2">MyTinerary</h3>
                     <p>Find your perfect trip, designed by insiders who know and love their cities!</p>
-                    <p>Street Wallaby 42, Sydney</p>
+                    <p>Street Wallaby 42, Sydney, Australia</p>
                 </div>
                 <nav className="mb-4 md:mb-0">
                     <NavLink to="/" className="mr-4 hover:underline">Home</NavLink>
