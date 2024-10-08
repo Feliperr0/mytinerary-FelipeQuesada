@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function Sidebar () {
+export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -25,9 +25,6 @@ export default function Sidebar () {
             </li>
             <li className="mb-4">
               <NavLink to="/profile" className="text-lg hover:underline">Profile</NavLink>
-            </li>
-            <li className="mb-4">
-              <NavLink to="/search" className="text-lg hover:underline">Search Destinations</NavLink>
             </li>
           </ul>
         </nav>

@@ -56,7 +56,7 @@ const createSlides = () => {
 export default function Carousel() {
   return (
     <div>
-      <h2 className="text-3xl font-bold text-center mb-6">Popular Mytineraries</h2>
+      <h2 className="cards-container flex flex-wrap justify-center bg-black">Popular Mytineraries</h2>
       <Slider {...settings}>
         {createSlides()}
       </Slider>
