@@ -9,7 +9,7 @@ export default function Home() {
         <CTA />
       </main>
       <section className=" py-10 max-w-screen-xl mx-auto">
-        <div className=" px-4 sm:px-6 lg:px-8">
+        <div className="">
           <Carousel />
         </div>
       </section>

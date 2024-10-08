@@ -24,7 +24,7 @@ const cities = [
   { country: "Italy", city: "Rome", flag: "https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg", attractions: ["Colosseum", "Vatican City"] },
   { country: "UK", city: "London", flag: "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg", attractions: ["Big Ben", "London Eye"] },
   { country: "Spain", city: "Barcelona", flag: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg", attractions: ["Sagrada Familia", "Park Güell"] },
-  { country: "China", city: "Beijing", flag: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Flag_of_China.svg", attractions: ["Great Wall of China", "Forbidden City"] },
+  { country: "China", city: "Beijing", flag: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg", attractions: ["Great Wall of China", "Forbidden City"] },
   { country: "Russia", city: "Moscow", flag: "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg", attractions: ["Red Square", "Kremlin"] },
 ];
 

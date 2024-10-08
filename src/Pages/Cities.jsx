@@ -77,7 +77,7 @@ const citiesData = [
     country: "China",
     city: "Beijing",
     continent: "Asia",
-    flag: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Flag_of_China.svg",
+    flag: "https://w7.pngwing.com/pngs/739/217/png-transparent-flag-of-china-national-emblem-of-the-peoples-republic-of-china-national-flag-chinese-flag-miscellaneous-flag-chinese-style-thumbnail.png",
     touristAttractions: ["Great Wall of China", "Forbidden City"]
   },
   {
@@ -100,7 +100,7 @@ export default function Cities() {
   });
 
   return (
-    <div className="flex flex-col items-center p-4">
+    <div className="container mx-auto w-full">
       <h1 className="text-3xl font-bold mb-4">Cities</h1>
       <Filters 
         searchText={searchText} 
@@ -108,7 +108,8 @@ export default function Cities() {
         continentFilter={continentFilter} 
         setContinentFilter={setContinentFilter} 
       />
-      <div className="bg-black cards-container flex flex-wrap justify-center">
+      <div className=''></div>
+      <div className="cards-container flex flex-wrap justify-center bg-black">
         {filteredCities.map(city => (
           <Card key={city.city} city={city} />
         ))}
