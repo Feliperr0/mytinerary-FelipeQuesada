@@ -24,13 +24,13 @@ export default function Header() {
                 <NavLink to="/home" className={`text-base md:text-lg mx-2 md:mx-4 hover:underline ${location.pathname === '/home' ? 'font-bold' : ''}`}>
                     Home
                 </NavLink>
-                <NavLink to="/cities" className="text-base md:text-lg mx-2 md:mx-4 hover:underline">
+                <NavLink to="/cities" className={`text-base md:text-lg mx-2 md:mx-4 hover:underline ${location.pathname === '/cities' ? 'font-bold' : ''}`}>
                     Cities
                 </NavLink>
-                <NavLink to="/about" className="text-base md:text-lg mx-2 md:mx-4 hover:underline">
+                <NavLink to="/about" className={`text-base md:text-lg mx-2 md:mx-4 hover:underline ${location.pathname === '/about' ? 'font-bold' : ''}`}>
                     About Us
                 </NavLink>
-                <NavLink to="/contact" className="text-base md:text-lg mx-2 md:mx-4 hover:underline">
+                <NavLink to="/contact" className={`text-base md:text-lg mx-2 md:mx-4 hover:underline ${location.pathname === '/contact' ? 'font-bold' : ''}`}>
                     Contact
                 </NavLink>
                 <img src={userIcon} alt="User Icon" className="h-8 w-8 md:h-10 md:w-10 rounded-full mx-2 md:mx-4" />
