@@ -12,7 +12,7 @@ export default function HomeLayout() {
       <Header />
       <Sidebar />
       </div>
-      <main className="flex-1 mt-2"> {/* Ajusta el margen superior aquí */}
+      <main className="flex-1 mt-1"> 
         <Outlet />
       </main>
       <Footer ></Footer>

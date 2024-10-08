@@ -78,7 +78,7 @@ const cities = [
     country: "Russia",
     city: "Moscow",
     flag: "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
-    touristAttractions: ["Red Square",  "Kremlin"]
+    touristAttractions: ["Red Square", "Kremlin"]
   }
 ];
 
@@ -90,12 +90,20 @@ const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "cities", element: <Cities></Cities> },
       { path: "home", element: <Home></Home> },
-     
+
     ],
+  },
+  {
+    element: <CitiesLayout></CitiesLayout>,
+    children: [
+      { path: "/", element: <Cities></Cities> },
+      { path: "/*", element: <NotFound></NotFound> }
+
+    ]
   },
 
 
-  { path: "/*", element: <NotFound></NotFound> }
+
 ])
 
 
@@ -104,7 +112,7 @@ function App() {
 
   return (
     <>
-    
+
       <RouterProvider router={router} />    </>
   )
 }

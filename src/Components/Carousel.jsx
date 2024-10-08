@@ -11,6 +11,7 @@ const settings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
+  
 };
 
 const cities = [
@@ -32,7 +33,7 @@ const createSlides = () => {
   const slides = [];
   for (let i = 0; i < cities.length; i += 4) {
     slides.push(
-      <div key={i} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 p-4">
+      <div key={i} className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 ">
         {cities.slice(i, i + 4).map((city, index) => (
           <div key={index} className="bg-gray-900 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
             <img src={city.flag} alt={city.city} className="w-full h-32 sm:h-48 object-cover" />
@@ -56,7 +57,7 @@ const createSlides = () => {
 export default function Carousel() {
   return (
     <div>
-      <h2 className="cards-container flex flex-wrap justify-center bg-black">Popular Mytineraries</h2>
+      <h2 className="text-3xl font-bold text-center mb-6">Popular Mytineraries</h2>
       <Slider {...settings}>
         {createSlides()}
       </Slider>

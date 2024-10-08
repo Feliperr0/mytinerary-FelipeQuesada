@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Card from '../Components/Card';
 import Filters from '../Components/Filters';
+import logo from '../assets/logo.png'; 
+import banderaChina from '../assets/banderaChina.png'; 
 
 const citiesData = [
   {
@@ -77,7 +79,7 @@ const citiesData = [
     country: "China",
     city: "Beijing",
     continent: "Asia",
-    flag: "https://w7.pngwing.com/pngs/739/217/png-transparent-flag-of-china-national-emblem-of-the-peoples-republic-of-china-national-flag-chinese-flag-miscellaneous-flag-chinese-style-thumbnail.png",
+    flag: banderaChina,
     touristAttractions: ["Great Wall of China", "Forbidden City"]
   },
   {
@@ -108,11 +110,17 @@ export default function Cities() {
         continentFilter={continentFilter} 
         setContinentFilter={setContinentFilter} 
       />
-      <div className=''></div>
-      <div className="cards-container flex flex-wrap justify-center bg-black">
-        {filteredCities.map(city => (
-          <Card key={city.city} city={city} />
-        ))}
+      <div className="cards-container flex flex-wrap justify-center bg-black p-4">
+        {filteredCities.length > 0 ? (
+          filteredCities.map(city => (
+            <Card key={city.city} city={city} />
+          ))
+        ) : (
+          <div className="flex flex-col items-center">
+            <p className="text-white text-2xl mb-4">No elements found</p>
+            <img src={logo} alt="No results" className="max-w-xs" />
+          </div>
+        )}
       </div>
     </div>
   );
