@@ -55,10 +55,11 @@ const cities = [
 
 
 export default function Carousel() {
-  const images = cities.map(city => city.flag); // Extraemos la propiedad flag de cada ciudad
+  const images = cities.map(city => city.flag)
 
   return (
-    <div className="mx-auto max-w-7xl m-2">
+    <>
+    <div className="mx-auto max-w-7xl ">
       <div className="relative">
         <Slider {...settings} className="relative">
           {images.map((image, index) => (
@@ -74,5 +75,6 @@ export default function Carousel() {
         </Slider>
       </div>
     </div>
+    </>
   );
 }

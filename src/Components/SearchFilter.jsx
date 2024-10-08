@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function SearchFilter({ searchText, setSearchText }) {
   return (
+    <>
     <input 
       type="text" 
       value={searchText} 
@@ -9,5 +10,6 @@ export default function SearchFilter({ searchText, setSearchText }) {
       placeholder="Search cities..." 
       className="p-2 border border-gray-300 rounded-md"
     />
+     </>
   );
 }

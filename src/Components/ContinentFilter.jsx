@@ -12,6 +12,7 @@ export default function ContinentFilter({ continentFilter, setContinentFilter })
   };
 
   return (
+    <>
     <div className="flex flex-wrap">
       {continents.map(continent => (
         <label key={continent} className="mr-4">
@@ -26,5 +27,6 @@ export default function ContinentFilter({ continentFilter, setContinentFilter })
         </label>
       ))}
     </div>
+    </>
   );
 }

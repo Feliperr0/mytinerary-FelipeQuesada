@@ -17,6 +17,7 @@ export default function Card({ city }) {
   }
 
   return (
+    <>
     <div className="card p-4 w-full max-w-xs  bg-gray-900 rounded-lg shadow-lg hover:scale-105 transition-transform hover:bg-gradient-to-br hover:from-blue-600 hover:to-green-600 hover:text-white m-4 sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/5">
       {loading ? (
         <div className="flex items-center justify-center h-full">
@@ -47,5 +48,6 @@ export default function Card({ city }) {
         </>
       )}
     </div>
+    </>
   );
 }

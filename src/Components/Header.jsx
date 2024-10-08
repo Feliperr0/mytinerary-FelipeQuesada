@@ -8,6 +8,7 @@ export default function Header() {
     const [showMenu, setShowMenu] = useState(false);
 
     return (
+        <>
         <header className="bg-blue-500 text-white p-4 md:p-6 flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center justify-between w-full md:w-auto">
                 <div className="flex items-center">
@@ -15,7 +16,7 @@ export default function Header() {
                     <h1 className="text-xl md:text-2xl font-bold">MyTinerary</h1>
                 </div>
                 <button className="block md:hidden" onClick={() => setShowMenu(!showMenu)}>
-                    <svg className="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-8 w-8 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
@@ -36,5 +37,6 @@ export default function Header() {
                 <img src={userIcon} alt="User Icon" className="h-8 w-8 md:h-10 md:w-10 rounded-full mx-2 md:mx-4" />
             </nav>
         </header>
+        </>
     );
 }

@@ -102,6 +102,7 @@ export default function Cities() {
   });
 
   return (
+    <>
     <div className="container mx-auto w-full text-center">
       <h1 className="text-3xl font-bold mb-4">Cities</h1>
       <Filters 
@@ -123,5 +124,6 @@ export default function Cities() {
         )}
       </div>
     </div>
+    </>
   );
 }

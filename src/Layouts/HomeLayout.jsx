@@ -7,6 +7,7 @@ import Sidebar from "../Components/Sidebar";
 
 export default function HomeLayout() {
   return (
+    <>
     <div className="min-h-screen flex flex-col bg-yellow-400">
       <div className="bg-black">
       <Header />
@@ -17,5 +18,6 @@ export default function HomeLayout() {
       </main>
       <Footer ></Footer>
       </div>
+      </>
   );
 }
