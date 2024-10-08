@@ -7,16 +7,17 @@ export default {
   theme: {
     extend: {
       keyframes: {
-        zoom: {
-          '0%': { transform: 'scale(1) translateX(-50%)' },
-          '100%': { transform: 'scale(1.1) translateX(0)' },
+        zoomOut: {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
+          '100%': { transform: 'scale(1)' },
         },
       },
       animation: {
-        'zoom-left-to-right': 'zoom 5s ease-in-out infinite',
+        'zoom-out': 'zoomOut 10s ease-in-out infinite',
       },
     },
   },
   variants: {},
   plugins: [],
-}
+};

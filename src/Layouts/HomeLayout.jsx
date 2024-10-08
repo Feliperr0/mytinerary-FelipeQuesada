@@ -7,12 +7,12 @@ import Sidebar from "../Components/Sidebar";
 
 export default function HomeLayout() {
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-yellow-400">
       <div className="bg-black">
       <Header />
       <Sidebar />
       </div>
-      <main className="flex-1 mt-1"> {/* Ajusta el margen superior aquí */}
+      <main className="flex-1 mt-2"> 
         <Outlet />
       </main>
       <Footer ></Footer>

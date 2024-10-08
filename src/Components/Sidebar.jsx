@@ -21,7 +21,7 @@ export default function Sidebar () {
               <NavLink to="/cities" className="text-lg hover:underline">Cities</NavLink>
             </li>
             <li className="mb-4">
-              <NavLink to="/about" className="text-lg hover:underline">About</NavLink>
+              <NavLink to="/about" className="text-lg hover:underline">About Us</NavLink>
             </li>
             <li className="mb-4">
               <NavLink to="/profile" className="text-lg hover:underline">Profile</NavLink>
