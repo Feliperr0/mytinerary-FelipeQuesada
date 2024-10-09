@@ -54,6 +54,7 @@ const cities = [
 
 export default function Carousel() {
   return (
+    <>
     <div className="mx-auto max-w-7xl">
       <div className="relative">
         <Slider {...settings} className="relative">
@@ -75,5 +76,6 @@ export default function Carousel() {
         </Slider>
       </div>
     </div>
+    </>
   );
 }
