@@ -13,8 +13,7 @@ const settings = {
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow:
-          3,
+        slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
         dots: true
@@ -53,28 +52,28 @@ const cities = [
   { country: "Russia", city: "Moscow", flag: "https://www.civitatis.com/blog/wp-content/uploads/2019/09/invierno-moscu.jpg", attractions: ["Red Square", "Kremlin"] },
 ];
 
-
 export default function Carousel() {
-  const images = cities.map(city => city.flag)
-
   return (
-    <>
-    <div className="mx-auto max-w-7xl ">
+    <div className="mx-auto max-w-7xl">
       <div className="relative">
         <Slider {...settings} className="relative">
-          {images.map((image, index) => (
+          {cities.map((city, index) => (
             <div key={index} className="relative p-2">
               <img
-                key={index}
-                src={image}
-                alt={`Bandera de ${cities[index].city}`}
+                src={city.flag}
+                alt={`Bandera de ${city.city}`}
                 className="w-full h-48 rounded-lg border-2 border-gray-300 object-cover"
               />
+              <div className="absolute bottom-0 left-0 w-full h-full bg-black bg-opacity-20 flex justify-center items-center">
+                <div className="text-center text-white">
+                  <h2 className="text-2xl font-bold">{city.city}</h2>
+                  <p className="text-lg">{city.country}</p>
+                </div>
+              </div>
             </div>
           ))}
         </Slider>
       </div>
     </div>
-    </>
   );
 }
