@@ -11,7 +11,7 @@ export default function HomeLayout() {
     <div className="min-h-screen flex flex-col bg-yellow-400">
       <div className="bg-black">
       <Header />
-      <Sidebar />
+ 
       </div>
       <main className="flex-1 mt-1"> 
         <Outlet />
