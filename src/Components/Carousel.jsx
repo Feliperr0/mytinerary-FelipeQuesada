@@ -45,7 +45,7 @@ export default function Carousel() {
       try {
         const cities = await fetch('http://localhost:8080/api/cities/all');
         const data = await cities.json();
-        console.log(data.cities); // Agrega esto para revisar los datos en la consola
+        console.log(data.cities); 
         setCities(Array.isArray(data.cities) ? data.cities : []);
       } catch (error) {
         console.error('Error:', error);
