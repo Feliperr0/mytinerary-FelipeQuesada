@@ -1,6 +1,6 @@
 import React from 'react';
 
-const continents = ["Asia", "South America", "Europe", "North America", "Africa", "Australia"];
+const continents = ["Asia", "South America", "Europe", "North America", "Africa", "Oceania"];
 
 export default function ContinentFilter({ continentFilter, setContinentFilter }) {
   const handleCheckboxChange = (continent) => {

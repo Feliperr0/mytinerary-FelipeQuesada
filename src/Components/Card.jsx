@@ -24,7 +24,7 @@ export default function Card({ city }) {
           </div>
         ) : (
           <>
-            <img src={city.flag} alt={city.city} className="rounded-t-lg w-full h-32 object-cover" />
+            <img src={city.photo} alt={city.city} className="rounded-t-lg w-full h-32 object-cover" />
             <div className="p-4 text-center">
               <h2 className="mb-2 text-xl font-bold tracking-tight text-white">{city.city}</h2>
               <h2 className="mb-2 text-lg font-semibold tracking-tight text-gray-300">Country:</h2>

@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "../Components/Carousel";
-import CTA from "../Components/CTA"; // Importa el componente CTA
+import CTA from "../Components/CTA"; 
 
 export default function Home() {
   return (
