@@ -47,7 +47,7 @@ export default function DetailsComponent() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-900 bg-opacity-70">
+      <div className="flex flex-col items-center justify-center l-screen bg-gray-900 bg-opacity-70">
         <p className="text-white text-2xl mb-4">{errorMessage}</p>
         <img src={logo} alt="No results" className="max-w-xs" />
       </div>
