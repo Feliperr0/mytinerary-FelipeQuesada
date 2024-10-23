@@ -11,22 +11,28 @@ export default function Cities() {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const cities = await fetch('http://localhost:8080/api/cities/all');
+        const query = new URLSearchParams();
+
+        if (searchText) {
+          query.append('city', searchText);
+          query.append('country', searchText);
+        }
+
+        if (continentFilter.length > 0) {
+          continentFilter.forEach(continent => query.append('continent', continent));
+        }
+
+        const cities = await fetch(`http://localhost:8080/api/cities/find?${query.toString()}`);
+        console.log(query.toString)
         const data = await cities.json();
-        setCitiesData(data.cities); // Accediendo al array de ciudades dentro de 'response'
+        setCitiesData(data.cities);
       } catch (error) {
         console.error('Error fetching cities:', error);
       }
     };
 
     fetchCities();
-  }, []);
-
-  const filteredCities = citiesData.filter(city => {
-    const matchesSearch = city.city.toLowerCase().includes(searchText.toLowerCase()) || city.country.toLowerCase().includes(searchText.toLowerCase());
-    const matchesContinent = continentFilter.length === 0 || continentFilter.includes(city.continent);
-    return matchesSearch && matchesContinent;
-  });
+  }, [searchText, continentFilter]);
 
   return (
     <div className="container mx-auto w-full text-center">
@@ -38,9 +44,9 @@ export default function Cities() {
         setContinentFilter={setContinentFilter}
       />
       <div className="cards-container flex flex-wrap justify-center bg-black p-4">
-        {filteredCities.length > 0 ? (
-          filteredCities.map(city => (
-            <Card key={city.city} city={city} />
+        {citiesData.length > 0 ? (
+          citiesData.map(city => (
+            <Card key={city._id} city={city} />
           ))
         ) : (
           <div className="flex flex-col items-center">

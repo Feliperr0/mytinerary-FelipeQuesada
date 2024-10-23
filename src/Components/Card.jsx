@@ -30,7 +30,7 @@ export default function Card({ city }) {
               <h2 className="mb-2 text-xl font-bold tracking-tight text-white">{city.city}</h2>
               <h2 className="mb-2 text-lg font-semibold tracking-tight text-gray-300">Country:</h2>
               <h3 className="mb-2 text-lg font-semibold tracking-tight text-gray-300">{city.country}</h3>
-              <NavLink to={`/details/${city._id}`} className={`text-base md:text-lg mx-2 md:mx-4 hover:underline ${location.pathname === '/details' ? 'font-bold' : ''}`}>
+              <NavLink to={`/details/city/${city._id}`} className="text-base md:text-lg mx-2 md:mx-4 hover:underline">
                 More Details
               </NavLink>
               <button className="bg-red-500 text-black px-4 py-2 font-bold w-full" onClick={handleClickDetails}>

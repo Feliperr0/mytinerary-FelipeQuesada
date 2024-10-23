@@ -14,7 +14,7 @@ export default function DetailsPage() {
           
         </main>
         <section className=" py-10 max-w-screen-xl mx-auto">
-          <div className="">
+          <div >
             
             <Carousel />
           </div>
