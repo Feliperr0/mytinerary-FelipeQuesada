@@ -43,7 +43,7 @@ export default function Cities() {
         continentFilter={continentFilter}
         setContinentFilter={setContinentFilter}
       />
-      <div className="cards-container flex flex-wrap justify-center bg-black p-4">
+      <div className="cards-container flex flex-wrap justify-center rounded-2xl bg-black p-4">
         {citiesData.length > 0 ? (
           citiesData.map(city => (
             <Card key={city._id} city={city} />
