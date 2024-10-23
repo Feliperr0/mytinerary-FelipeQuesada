@@ -7,7 +7,7 @@ export default function DetailsComponent() {
   const [city, setCity] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); // Añadir estado para el mensaje de error
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,7 +22,7 @@ export default function DetailsComponent() {
           setCity(data);
         } else {
           setError(true);
-          setErrorMessage(data.message || 'No city data found');
+          setErrorMessage(data.message );
           console.log(data.message)
         }
       } catch (error) {

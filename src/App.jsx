@@ -5,7 +5,7 @@ import Cities from './Pages/Cities.jsx';
 import NotFound from './Pages/NotFound.jsx';
 import HomeLayout from "./Layouts/HomeLayout.jsx";
 import CitiesLayout from './Layouts/CitiesLayout.jsx';
-import DetailsPage from './Pages/DetailsPage.jsx'; // Importamos el nuevo componente Details
+import DetailsPage from './Pages/DetailsPage.jsx'; 
 
 const router = createBrowserRouter([
   {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "cities", element: <Cities></Cities> },
       { path: "home", element: <Home></Home> },
-      { path: "details/city/:id", element: <DetailsPage></DetailsPage> } // Nueva ruta para Details
+      { path: "details/city/:id", element: <DetailsPage></DetailsPage> } 
     ],
   },
   {

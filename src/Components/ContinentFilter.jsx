@@ -4,14 +4,14 @@ export default function ContinentFilter({ continentFilter, setContinentFilter })
   const [continents, setContinents] = useState([]);
 
   useEffect(() => {
-    // Función asíncrona para obtener los continentes
+
     const fetchContinents = async () => {
       try {
         const response = await fetch('http://localhost:8080/api/cities/all');
         const data = await response.json();
         const cities = data.cities;
 
-        // Extraer continentes únicos
+
         const uniqueContinents = [...new Set(cities.map(city => city.continent))];
         setContinents(uniqueContinents);
       } catch (error) {
@@ -19,7 +19,7 @@ export default function ContinentFilter({ continentFilter, setContinentFilter })
       }
     };
 
-    fetchContinents(); // Llamada a la función asíncrona dentro de useEffect
+    fetchContinents();
   }, []);
 
   const handleCheckboxChange = (continent) => {
