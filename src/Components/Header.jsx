@@ -9,10 +9,10 @@ export default function Header() {
 
     return (
         <>
-            <header className="bg-blue-500 text-white p-4 md:p-6 flex justify-between items-center relative">
+             <header className="bg-blue-500 text-white p-4 md:p-6 flex justify-between items-center relative">
                 <div className="flex items-center">
                     <img src={logo} alt="MyTinerary Logo" className="h-10 md:h-12 mr-3" />
-                    <h1 className="text-xl md:text-2xl font-bold">MyTinerary</h1>
+                    <h1 className="text-xl md:text-4xl font-bold">MyTinerary</h1>
                 </div>
                 {!showMenu && (
                     <button className="block md:hidden" onClick={() => setShowMenu(!showMenu)}>

@@ -1,8 +1,27 @@
-import React from 'react';
-
-const continents = ["Asia", "South America", "Europe", "North America", "Africa", "Oceania"];
+import React, { useState, useEffect } from 'react';
 
 export default function ContinentFilter({ continentFilter, setContinentFilter }) {
+  const [continents, setContinents] = useState([]);
+
+  useEffect(() => {
+    // Función asíncrona para obtener los continentes
+    const fetchContinents = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/cities/all');
+        const data = await response.json();
+        const cities = data.cities;
+
+        // Extraer continentes únicos
+        const uniqueContinents = [...new Set(cities.map(city => city.continent))];
+        setContinents(uniqueContinents);
+      } catch (error) {
+        console.error("Error fetching continents: ", error);
+      }
+    };
+
+    fetchContinents(); // Llamada a la función asíncrona dentro de useEffect
+  }, []);
+
   const handleCheckboxChange = (continent) => {
     if (continentFilter.includes(continent)) {
       setContinentFilter(continentFilter.filter(c => c !== continent));
@@ -13,20 +32,20 @@ export default function ContinentFilter({ continentFilter, setContinentFilter })
 
   return (
     <>
-    <div className="flex flex-wrap">
-      {continents.map(continent => (
-        <label key={continent} className="mr-4">
-          <input
-            type="checkbox"
-            value={continent}
-            checked={continentFilter.includes(continent)}
-            onChange={() => handleCheckboxChange(continent)}
-            className="mr-2"
-          />
-          {continent}
-        </label>
-      ))}
-    </div>
+      <div className="flex flex-wrap">
+        {continents.map(continent => (
+          <label key={continent} className="mr-4">
+            <input
+              type="checkbox"
+              value={continent}
+              checked={continentFilter.includes(continent)}
+              onChange={() => handleCheckboxChange(continent)}
+              className="mr-2"
+            />
+            {continent}
+          </label>
+        ))}
+      </div>
     </>
   );
 }
