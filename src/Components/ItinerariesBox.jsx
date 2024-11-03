@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import PriceRating from './PriceRating';
+import LikeButtonCount from './LikeButtonCount';
 
 export default function ItinerariesBox() {
   const { id } = useParams();
@@ -45,38 +47,39 @@ export default function ItinerariesBox() {
   }
 
   return (
-    <div className="card p-4 w-full max-w-xs bg-gray-900 rounded-lg shadow-lg hover:scale-105 transition-transform hover:bg-gradient-to-br hover:from-gray-500 hover:to-gray-800 hover:bg-opacity-70 m-4 sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/5">
-
-      <div className="p-4">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-white">Itineraries</h2>
+    <div className="bg-gray-800 bg-opacity-90 w-11/12 mx-auto p-6 rounded-lg shadow-2xl transition-all duration-500">
+      <h1 className="text-4xl font-extrabold text-yellow-400 text-center mb-6">Itineraries</h1>
+      <div className="flex flex-wrap justify-center gap-6">
         {city.itinerary.length > 0 ? (
-          <ul className="list-disc list-inside text-gray-300">
-            {city.itinerary.map(itinerary => (
-              <li key={itinerary._id} className="mb-2">
-                <h3 className="text-lg font-semibold">{itinerary.accountName}</h3>
-                <img src={itinerary.photo} alt={itinerary.accountName} className="w-full h-20 object-cover rounded mb-2" />
-                <p>Price: {itinerary.price}</p>
-                <p>Duration: {itinerary.tripDuration}</p>
-                <p>Likes: {itinerary.likes}</p>
-                <p>Hashtags: {itinerary.hashtags.join(', ')}</p>
-                <button
-                  className="bg-blue-500 text-black px-4 py-2 font-bold w-full mt-2 rounded-full hover:bg-yellow-400"
-                  onClick={() => handleViewMore(itinerary._id)}
-                >
-                  View more
-                </button>
-                {viewMore === itinerary._id && (
-                  <div className="mt-4 bg-gray-800 p-4 rounded-lg">
-                    <p className="text-yellow-400">Under construction</p>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
+          city.itinerary.map(itinerary => (
+            <div key={itinerary._id} className="flex flex-col items-center bg-gray-700 bg-opacity-90 p-6 rounded-lg shadow-lg hover:scale-105 hover:bg-blue-600 transition-transform duration-300 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <h3 className="text-2xl font-bold text-center text-yellow-400">{itinerary.accountName}</h3>
+              <img src={itinerary.photo} alt={itinerary.accountName} className="w-24 h-24 object-cover rounded-full mb-4 mx-auto border-4 border-yellow-400" />
+              <div className="text-center text-yellow-300">
+                <p>Price Rate</p>
+                <PriceRating price={itinerary.price} />
+              </div>
+              <p className="text-center text-yellow-300"> Estimated Time: {itinerary.tripDuration} Hours</p>
+              <div><LikeButtonCount initialLikes={itinerary.likes} /></div>
+              <p className="text-center text-yellow-300">Hashtags: {itinerary.hashtags.join(', ')}</p>
+              <button
+                className="bg-yellow-400 text-gray-900 px-4 py-2 font-bold w-full mt-4 rounded-full hover:bg-yellow-500 transition-colors duration-300"
+                onClick={() => handleViewMore(itinerary._id)}
+              >
+                View more
+              </button>
+              {viewMore === itinerary._id && (
+                <div className="mt-4 bg-gray-800 p-4 rounded-lg">
+                  <p className="text-yellow-400 text-center">Under construction</p>
+                </div>
+              )}
+            </div>
+          ))
         ) : (
-          <p className="text-gray-300">No itineraries found for this city.</p>
+          <p className="text-yellow-400">No itineraries found for this city.</p>
         )}
       </div>
     </div>
+
   );
 }
