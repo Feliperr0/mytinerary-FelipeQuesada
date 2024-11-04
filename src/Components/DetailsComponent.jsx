@@ -19,12 +19,12 @@ export default function DetailsComponent() {
           setCity(data);
         } else {
           setError(true);
-          setErrorMessage(data.message || 'City not found');
+          setErrorMessage(data.message);
         }
       } catch (error) {
-        console.error("Error fetching city details: ", error);
+        console.error("Error", error);
         setError(true);
-        setErrorMessage('An error occurred while fetching city details.');
+        setErrorMessage(data.message);
       } finally {
         setLoading(false);
       }
