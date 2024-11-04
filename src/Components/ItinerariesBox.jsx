@@ -7,6 +7,7 @@ export default function ItinerariesBox() {
   const { id } = useParams();
   const [city, setCity] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [details, setDetails] = useState(false);
   const [viewMore, setViewMore] = useState(null);
 
@@ -15,9 +16,14 @@ export default function ItinerariesBox() {
       try {
         const response = await fetch(`http://localhost:8080/api/cities/id/${id}`);
         const data = await response.json();
-        setCity(data);
+
+        if (response.ok) {
+          setCity(data);
+        } else {
+          setError(data.message);
+        }
       } catch (error) {
-        console.error('Error fetching city data:', error);
+        setError(data.message);
       } finally {
         setLoading(false);
       }
@@ -41,9 +47,8 @@ export default function ItinerariesBox() {
       </div>
     );
   }
-
-  if (!city) {
-    return <div>City not found</div>;
+  if (error || !city || !city.itinerary) {
+    return null;
   }
 
   return (
@@ -59,8 +64,8 @@ export default function ItinerariesBox() {
                 <p>Price Rate</p>
                 <PriceRating price={itinerary.price} />
               </div>
-              <p className="text-center text-yellow-300"> Estimated Time: {itinerary.tripDuration} Hours</p>
-              <div><LikeButtonCount initialLikes={itinerary.likes} /></div>
+              <p className="text-center text-yellow-300">Estimated Time: {itinerary.tripDuration} Hours</p>
+              <LikeButtonCount initialLikes={itinerary.likes} />
               <p className="text-center text-yellow-300">Hashtags: {itinerary.hashtags.join(', ')}</p>
               <button
                 className="bg-yellow-400 text-gray-900 px-4 py-2 font-bold w-full mt-4 rounded-full hover:bg-yellow-500 transition-colors duration-300"
@@ -80,6 +85,5 @@ export default function ItinerariesBox() {
         )}
       </div>
     </div>
-
   );
 }

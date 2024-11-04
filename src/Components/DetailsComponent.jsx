@@ -10,10 +10,6 @@ export default function DetailsComponent() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 400);
-
     const fetchCityDetails = async () => {
       try {
         const response = await fetch(`http://localhost:8080/api/cities/id/${id}`);
@@ -23,18 +19,18 @@ export default function DetailsComponent() {
           setCity(data);
         } else {
           setError(true);
-          setErrorMessage(data.message);
-          console.log(data.message);
+          setErrorMessage(data.message || 'City not found');
         }
       } catch (error) {
         console.error("Error fetching city details: ", error);
         setError(true);
         setErrorMessage('An error occurred while fetching city details.');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCityDetails();
-    return () => clearTimeout(timer);
   }, [id]);
 
   if (loading) {
@@ -44,10 +40,9 @@ export default function DetailsComponent() {
       </div>
     );
   }
-
-  if (error) {
+  if (error || !city) {
     return (
-      <div className="flex flex-col items-center justify-center l-screen bg-gray-900 bg-opacity-70">
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-900 bg-opacity-70">
         <p className="text-white text-2xl mb-4">{errorMessage}</p>
         <img src={logo} alt="No results" className="max-w-xs" />
       </div>
