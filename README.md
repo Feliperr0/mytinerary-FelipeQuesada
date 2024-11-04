@@ -7,8 +7,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-
-
 ## Requisitos
 
 - Node.js (v12 o superior)
@@ -40,6 +38,10 @@ Currently, two official plugins are available:
     yarn install
     ```
 
+    ```sh
+    npm install @reduxjs/toolkit react-redux
+    ```
+
 ## Tecnologías Utilizadas
 
 - **React**: Biblioteca de JavaScript para construir interfaces de usuario.
@@ -47,13 +49,9 @@ Currently, two official plugins are available:
 - **React Router Dom**: Librería para gestionar rutas en aplicaciones React.
 - **React Slider**: Componente de carrusel para React.
 
-
-
 ### Componentes Slider
 
 Para implementar un carrusel de itinerarios, usa React Slider. Puedes encontrar más información en la [documentación oficial](https://react-slick.neostack.com/).
-
-
 
 ## Recursos
 
@@ -62,5 +60,4 @@ Para implementar un carrusel de itinerarios, usa React Slider. Puedes encontrar 
 - [Documentación de React Router](https://reactrouter.com/web/guides/quick-start)
 - [Documentación de React Slider](https://react-slick.neostack.com/)
 
-
-###### ReadME, generado con ayuda de Windows Copilot+ 
+###### ReadME, generado con ayuda de Windows Copilot+

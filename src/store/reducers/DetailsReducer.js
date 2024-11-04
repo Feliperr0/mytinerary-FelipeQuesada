@@ -22,7 +22,7 @@ const detailsReducer = createReducer(initialState, (builder) => {
     .addCase(fetchCityDetails.rejected, (state, action) => {
       state.loading = false;
       state.error = true;
-      state.errorMessage = action.error.message;
+      state.errorMessage = action.payload?.message || 'Error';
     });
 });
 
