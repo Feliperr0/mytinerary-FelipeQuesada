@@ -1,37 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCityDetails } from '../store/actions/DetailsActions';
 import logo from '../assets/logo.png';
 
 export default function DetailsComponent() {
   const { id } = useParams();
-  const [city, setCity] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
+  const city = useSelector(state => state.details.city);
+  const loading = useSelector(state => state.details.loading);
+  const error = useSelector(state => state.details.error);
+  const errorMessage = useSelector(state => state.details.errorMessage);
 
   useEffect(() => {
-    const fetchCityDetails = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/cities/id/${id}`);
-        const data = await response.json();
-
-        if (response.ok) {
-          setCity(data);
-        } else {
-          setError(true);
-          setErrorMessage(data.message);
-        }
-      } catch (error) {
-        console.error("Error", error);
-        setError(true);
-        setErrorMessage(data.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCityDetails();
-  }, [id]);
+    dispatch(fetchCityDetails(id));
+  }, [dispatch, id]);
 
   if (loading) {
     return (
@@ -70,3 +53,4 @@ export default function DetailsComponent() {
     </div>
   );
 }
+
