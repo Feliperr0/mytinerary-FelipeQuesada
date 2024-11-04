@@ -1,9 +1,9 @@
 import { createAction, createAsyncThunk} from '@reduxjs/toolkit';
 
-export const setSearchText = createAction('filters/setSearchText');
-export const setContinentFilter = createAction('filters/setContinentFilter');
+export const setSearchText = createAction('SEARCH_TEXT');
+export const setContinentFilter = createAction('SEARCH_CONTINENT');
 
-export const fetchCitiesWithFilters = createAsyncThunk('cities/fetchCitiesWithFilters', async ({ searchText, continentFilter }) => {
+export const fetchCitiesWithFilters = createAsyncThunk('GET_CITIES_FILTERED', async ({ searchText, continentFilter }) => {
   const query = new URLSearchParams();
 
   if (searchText) {

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchCities = createAsyncThunk('cities/fetchCities', async ({ searchText, continentFilter }) => {
+export const fetchCities = createAsyncThunk('GET_CITIES', async ({ searchText, continentFilter }) => {
   const query = new URLSearchParams();
 
   if (searchText) {

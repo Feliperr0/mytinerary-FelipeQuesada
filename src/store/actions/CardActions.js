@@ -1,4 +1,4 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const toggleDetails = createAction('card/toggleDetails');
-export const toggleLoading = createAction('card/toggleLoading');
+export const toggleDetails = createAction('TOGGLE_DETAILS');
+export const toggleLoading = createAction('TOGGLE_LOADING');

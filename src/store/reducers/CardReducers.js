@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { toggleDetails } from '../actions/CardActions';
 
 const initialState = {
   details: false,
@@ -8,10 +7,10 @@ const initialState = {
 
 const cardReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(toggleDetails, (state) => {
+    .addCase('TOGGLE_DETAILS', (state) => {
       state.details = !state.details;
     })
-    .addCase('card/toggleLoading', (state, action) => {
+    .addCase('TOGGLE_LOADING', (state, action) => {
       state.loading = action.payload;
     });
 });
