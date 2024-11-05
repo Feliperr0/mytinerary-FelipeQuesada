@@ -15,7 +15,7 @@ export default function ContinentFilter({ continentFilter, setContinentFilter })
         const uniqueContinents = [...new Set(cities.map(city => city.continent))];
         setContinents(uniqueContinents);
       } catch (error) {
-        console.error("Error fetching continents: ", error);
+        console.error("Error ", error);
       }
     };
 

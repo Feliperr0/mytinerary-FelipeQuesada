@@ -20,7 +20,8 @@ export default function Filters() {
         placeholder="Search by country..."
         value={searchText}
         onChange={e => {
-          console.log("Search Text Change:", e.target.value);
+          console.log("Search Text Change:", e.target.value); // ya funciona! yayyy!
+          
           dispatch(setSearchText(e.target.value));
         }}
         className="w-full p-3 mb-4 text-xl font-bold text-black text-center bg-opacity-80 rounded-lg border-2 border-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"

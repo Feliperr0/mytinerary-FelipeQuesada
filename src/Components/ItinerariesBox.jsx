@@ -48,7 +48,7 @@ export default function ItinerariesBox() {
     );
   }
   if (error || !city || !city.itinerary) {
-    return null;
+    return null;  //aquí para evitar mostrar otro contenido, porque si el id no existe o está mal escrito, el componente details, ya muestra el contenido de error de la api, así no se hace redundante
   }
 
   return (
