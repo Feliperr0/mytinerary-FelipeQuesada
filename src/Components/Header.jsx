@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import userIcon from '../assets/360_F_261902858_onbxqSHf193X4w7e8fdRH8vjjoT3vOVZ.jpg';
@@ -9,8 +10,15 @@ export default function Header() {
     const location = useLocation();
     const [showMenu, setShowMenu] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // Obtenemos el estado de autenticación
 
     const handleLoginModalToggle = () => setShowLoginModal(prev => !prev);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            setShowLoginModal(false); // Cierra el modal cuando el usuario se haya logueado
+        }
+    }, [isLoggedIn]);
 
     return (
         <>
@@ -50,7 +58,7 @@ export default function Header() {
                     <AuthButtons onLoginClick={handleLoginModalToggle} /> {/* Incluir AuthButtons */}
                 </nav>
             </header>
-            {showLoginModal && <LoginForm onClose={handleLoginModalToggle} />} {/* Asegúrate de que showLoginModal sea true */}
+            {showLoginModal && <LoginForm onClose={handleLoginModalToggle} />} {/* Mostrar LoginForm si showLoginModal es true */}
         </>
     );
 }

@@ -12,7 +12,7 @@ export const login = createAsyncThunk("auth/login", async ({ email, password }, 
         return response.data;
     } catch (error) {
         console.error("Error en la solicitud", error);
-        return thunkAPI.rejectWithValue(error.response.data);
+        return thunkAPI.rejectWithValue(error.response.data); // Rechazar con el mensaje de error del backend
     }
 });
 

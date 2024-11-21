@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/actions/LogActions';
 
 const LoginForm = ({ onClose }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const errorMessage = useSelector((state) => state.auth.errorMessage); // Obtener el mensaje de error del estado
 
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(login({ email, password }));
-        onClose(); // Cerrar el modal después del login
     };
 
     return (
@@ -23,6 +23,11 @@ const LoginForm = ({ onClose }) => {
                     &times; {/* Este es el símbolo de la 'X' */}
                 </button>
                 <h2 className="text-2xl font-bold text-center text-yellow-400 mb-6">Login</h2>
+                {errorMessage && (
+                    <div className="bg-red-500 text-white p-2 rounded mb-4">
+                        {errorMessage}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-yellow-200 mb-2">Email:</label>
