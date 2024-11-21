@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 import store from './store/store.js';
 import './App.css';
 import Home from "./Pages/Home.jsx";
@@ -7,7 +7,10 @@ import Cities from './Pages/Cities.jsx';
 import NotFound from './Pages/NotFound.jsx';
 import HomeLayout from "./Layouts/HomeLayout.jsx";
 import CitiesLayout from './Layouts/CitiesLayout.jsx';
-import DetailsPage from './Pages/DetailsPage.jsx'; 
+import DetailsPage from './Pages/DetailsPage.jsx';
+import { useEffect } from 'react';
+import { checkAuth } from './store/actions/LogActions';
+import Header from './Components/Header'; // Importar el componente Header
 
 const router = createBrowserRouter([
   {
@@ -16,7 +19,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "cities", element: <Cities></Cities> },
       { path: "home", element: <Home></Home> },
-      { path: "details/city/:id", element: <DetailsPage></DetailsPage> } 
+      { path: "details/city/:id", element: <DetailsPage></DetailsPage> }
     ],
   },
   {
@@ -29,11 +32,27 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
   return (
-    <Provider store={store}>
+    <div className="App">
+      <Header /> {/* Usar Header */}
       <RouterProvider router={router} />
-    </Provider>
+    </div>
   );
 }
 
-export default App;
+const AppWrapper = () => (
+  <Provider store={store}>
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider>
+  </Provider>
+);
+
+export default AppWrapper;

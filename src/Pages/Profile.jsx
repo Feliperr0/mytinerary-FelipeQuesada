@@ -3,7 +3,7 @@ import React from "react"
 export default function Profile() {
     return (
         <>
-        <Login></Login>
+       
             <div>Profile</div>
             <p>This is Profile</p>
             <div className="flex items-center justify-center h-screen bg-gray-900">

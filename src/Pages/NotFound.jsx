@@ -3,6 +3,9 @@ import React from "react"
 export default function NotFound() {
     return (
         <>
+
+
+       
             <div>Not Found</div>
             <p>This is not found</p>
             <div className="flex items-center justify-center h-screen bg-gray-900">

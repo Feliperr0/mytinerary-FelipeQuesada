@@ -1,41 +1,48 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { login } from "../actions/AuthActions";
-
+import { login, logout } from "../actions/LogActions";
 
 const initialState = {
     loading: false,
     error: false,
     user: null,
     token: null,
-    
+    isLoggedIn: false
 }
 
-const authReducer =  createReducer(initialState, (builder) => {
-    builder.addCase(login.fulfilled,(state, action) => {
-        console.log("se ejecuto correctamente")
-        console.log(action)
-        state.loading = false,
-        state.error= false,
-        state.user = action.payload.user,
-        state.token = action.payload.token
+const authReducer = createReducer(initialState, (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+        console.log("Login exitoso");
+        console.log(action);
+        state.loading = false;
+        state.error = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+    });
+    builder.addCase(login.pending, (state, action) => {
+        console.log("Inicio de sesión en progreso");
+        state.loading = true;
+        state.error = false;
+        state.user = null;
+        state.token = null;
+        state.isLoggedIn = false;
+    });
+    builder.addCase(login.rejected, (state, action) => {
+        console.log("Error en el inicio de sesión");
+        console.log(action);
+        state.loading = false;
+        state.error = true;
+        state.user = null;
+        state.token = null;
+        state.isLoggedIn = false;
+    });
+    builder.addCase(logout.fulfilled, (state) => {
+        state.loading = false;
+        state.error = false;
+        state.user = null;
+        state.token = null;
+        state.isLoggedIn = false;
+    });
+});
 
-    })
-    builder.addCase(login.pending,(state,action) => {
-        console.log("se  inicio sign in")
-        console.log(action)
-        state.loading = true,
-        state.error= false,
-        state.user = null,
-        state.token = null
-    })
-    builder.addCase(login.rejected, (state, action)=>{
-        console.log("error")
-        console.log(action)
-        state.loading = false,
-        state.error= true,
-        state.user = null,
-        state.token = null
-    })
-})
-
-export default authReducer
+export default authReducer;

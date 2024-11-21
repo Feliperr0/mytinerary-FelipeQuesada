@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import {  createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const login = createAsyncThunk("login", async ({ email, password }) => {
