@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "../Components/Carousel";
 import CTA from "../Components/CTA"; 
+import LoginForm from "../Components/LoginForm";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <div className="">
           <Carousel />
         </div>
+     <LoginForm></LoginForm>
       </section>
     </>
   );
