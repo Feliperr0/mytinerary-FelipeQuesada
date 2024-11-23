@@ -5,13 +5,10 @@ import axios from "axios";
 export const login = createAsyncThunk("auth/login", async ({ email, password }, thunkAPI) => {
     const credentials = { email, password };
     try {
-        console.log("Haciendo solicitud al backend");
         const response = await axios.post("http://localhost:8080/api/auth/signin", credentials);
         localStorage.setItem('token', response.data.token); // Guarda el token en localStorage
-        console.log("Solicitud exitosa, token guardado");
         return response.data;
     } catch (error) {
-        console.error("Error en la solicitud", error);
         return thunkAPI.rejectWithValue(error.response.data); // Rechazar con el mensaje de error del backend
     }
 });
@@ -22,11 +19,21 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 });
 
 // Acción para verificar autenticación al cargar la aplicación
-export const checkAuth = () => (dispatch) => {
+export const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
     const token = localStorage.getItem('token');
     if (token) {
-        dispatch(login.fulfilled({ user: { email: "storedUser@example.com" }, token })); // Simula un usuario autenticado
+        try {
+            // Aquí podrías realizar una solicitud para verificar el token
+            // const response = await axios.get("http://localhost:8080/api/auth/checkToken", {
+            //     headers: { Authorization: `Bearer ${token}` }
+            // });
+            // Supongamos que la respuesta es exitosa
+            return { user: { email: "storedUser@example.com" }, token }; // Simula un usuario autenticado
+        } catch (error) {
+            localStorage.removeItem('token');
+            return thunkAPI.rejectWithValue("Token inválido");
+        }
     } else {
-        dispatch(logout());
+        return thunkAPI.rejectWithValue("No token found");
     }
-};
+});

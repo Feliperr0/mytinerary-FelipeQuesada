@@ -1,10 +1,10 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { login, logout } from "../actions/LogActions";
+import { login, logout, checkAuth } from "../actions/LogActions";
 
 const initialState = {
     loading: false,
     error: false,
-    errorMessage: null, // Añadir campo para el mensaje de error
+    errorMessage: null,
     user: null,
     token: null,
     isLoggedIn: false
@@ -12,7 +12,6 @@ const initialState = {
 
 const authReducer = createReducer(initialState, (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-        console.log("Login exitoso");
         state.loading = false;
         state.error = false;
         state.errorMessage = null;
@@ -21,7 +20,6 @@ const authReducer = createReducer(initialState, (builder) => {
         state.isLoggedIn = true;
     });
     builder.addCase(login.pending, (state) => {
-        console.log("Inicio de sesión en progreso");
         state.loading = true;
         state.error = false;
         state.errorMessage = null;
@@ -30,10 +28,9 @@ const authReducer = createReducer(initialState, (builder) => {
         state.isLoggedIn = false;
     });
     builder.addCase(login.rejected, (state, action) => {
-        console.log("Error en el inicio de sesión");
         state.loading = false;
         state.error = true;
-        state.errorMessage = action.payload.message; // Almacenar el mensaje de error del backend
+        state.errorMessage = action.payload.message;
         state.user = null;
         state.token = null;
         state.isLoggedIn = false;
@@ -42,6 +39,22 @@ const authReducer = createReducer(initialState, (builder) => {
         state.loading = false;
         state.error = false;
         state.errorMessage = null;
+        state.user = null;
+        state.token = null;
+        state.isLoggedIn = false;
+    });
+    builder.addCase(checkAuth.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.errorMessage = null;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+    });
+    builder.addCase(checkAuth.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = action.payload;
         state.user = null;
         state.token = null;
         state.isLoggedIn = false;

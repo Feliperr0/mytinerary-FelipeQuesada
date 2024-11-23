@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Provider, useSelector, useDispatch } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store from './store/store.js';
 import './App.css';
 import Home from "./Pages/Home.jsx";
@@ -31,8 +31,9 @@ const router = createBrowserRouter([
   },
 ]);
 
+
+
 function App() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
