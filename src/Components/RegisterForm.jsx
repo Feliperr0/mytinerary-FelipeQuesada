@@ -1,103 +1,122 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../store/actions/LogActions';
 
 const RegisterForm = ({ onClose }) => {
     const [name, setName] = useState('');
-    const [photo, setPhoto] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState(null);
-    const [error, setError] = useState(null);
+    const [photo, setPhoto] = useState('');
+    const [showSuccess, setShowSuccess] = useState(false);
+    const dispatch = useDispatch();
+    const { errorMessage, successMessage } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        // Limpia los mensajes de error y éxito cuando el modal se cierra
+        return () => {
+            dispatch({ type: 'auth/clearMessages' });
+        };
+    }, [dispatch]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const userData = { name, email, password, photo };
         try {
-            const response = await axios.post('http://localhost:8080/api/users/register', {
-                name,
-                photo,
-                email,
-                password
-            });
-            setMessage(response.data.message); // Mostrar el mensaje de éxito
-            setError(null); // Limpiar los mensajes de error
+            await dispatch(register(userData)).unwrap();
+            setShowSuccess(true);
+            setTimeout(() => {
+                setShowSuccess(false);
+                onClose(); // Cerrar modal después de 3 segundos
+            }, 3000);
         } catch (error) {
-            setError(error.response?.data?.message || 'An unexpected error occurred.'); // Mostrar los mensajes de error
-            setMessage(null); // Limpiar los mensajes de éxito
+            console.error("Error registering user:", error);
         }
     };
 
-    console.log('RegisterForm renderizado');
-
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-gray-800 rounded-lg shadow-lg border border-yellow-500 w-full max-w-md p-8">
+            <div className="relative bg-gray-800 rounded-lg shadow-lg border border-yellow-500 w-full max-w-md p-8 transition-all duration-300 ease-in-out transform hover:scale-105">
                 <button
                     onClick={onClose}
-                    className="absolute top-2 right-2 text-gray-200 hover:text-gray-400 text-2xl"
+                    className="absolute top-2 right-2 text-gray-200 hover:text-gray-400 text-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 >
-                    &times; {/* Este es el símbolo de la 'X' */}
+                    &times;
                 </button>
                 <h2 className="text-2xl font-bold text-center text-yellow-400 mb-6">Register</h2>
-                {message && (
+                {successMessage && showSuccess && (
                     <div className="bg-green-500 text-white p-2 rounded mb-4">
-                        {message}
+                        {successMessage}
                     </div>
                 )}
-                {error && (
+                {errorMessage && !showSuccess && (
                     <div className="bg-red-500 text-white p-2 rounded mb-4">
-                        {error}
+                        {Array.isArray(errorMessage) ? (
+                            <ul>
+                                {errorMessage.map((msg, index) => (
+                                    <li key={index}>{msg}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>{errorMessage}</p>
+                        )}
                     </div>
-                )}
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block text-yellow-200 mb-2">Name:</label>
-                        <input
-                            type="text"
-                            id="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="photo" className="block text-yellow-200 mb-2">Photo URL:</label>
-                        <input
-                            type="text"
-                            id="photo"
-                            value={photo}
-                            onChange={(e) => setPhoto(e.target.value)}
-                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-yellow-200 mb-2">Email:</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block text-yellow-200 mb-2">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                            required
-                        />
-                    </div>
-                    <button type="submit" className="w-full py-3 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-lg">Register</button>
-                </form>
-            </div>
+                )}                <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                    <label htmlFor="name" className="block text-yellow-200 mb-2">Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="email" className="block text-yellow-200 mb-2">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="password" className="block text-yellow-200 mb-2">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="photo" className="block text-yellow-200 mb-2">Photo URL:</label>
+                    <input
+                        type="text"
+                        id="photo"
+                        value={photo}
+                        onChange={(e) => setPhoto(e.target.value)}
+                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                        required
+                    />
+                </div>
+                <button type="submit" className="w-full py-3 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105">Register</button>
+            </form>
+            {successMessage && showSuccess && (
+                <div className="mt-4 text-white">
+                    <p>Name: {name}</p>
+                    <p>Email: {email}</p>
+                </div>
+            )}
         </div>
-    );
+    </div>
+);
 };
 
 export default RegisterForm;
+

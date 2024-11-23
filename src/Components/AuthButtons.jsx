@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../store/actions/LogActions.js';
+import { logout } from '../store/actions/LogActions';
 
-const AuthButtons = ({ onLoginClick }) => {
+const AuthButtons = ({ onLoginClick, onRegisterClick }) => {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const dispatch = useDispatch();
 
@@ -21,7 +21,8 @@ const AuthButtons = ({ onLoginClick }) => {
                         Sign In
                     </button>
                     <button
-                        className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+                        onClick={onRegisterClick}
+                        className="px-6 py-2 bg-red-500 hover:bg-red-800 text-white font-bold rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
                     >
                         Register
                     </button>

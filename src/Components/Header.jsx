@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import userIcon from '../assets/360_F_261902858_onbxqSHf193X4w7e8fdRH8vjjoT3vOVZ.jpg';
-import AuthButtons from './AuthButtons'; // Importa el componente AuthButtons
-import LoginForm from './LoginForm'; // Importa el componente LoginForm
+import AuthButtons from './AuthButtons';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+import { logout } from '../store/actions/LogActions';
 
 export default function Header() {
     const location = useLocation();
+    const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // Obtenemos el estado de autenticación
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const user = useSelector((state) => state.auth.user);
 
     const handleLoginModalToggle = () => setShowLoginModal(prev => !prev);
+    const handleRegisterModalToggle = () => setShowRegisterModal(prev => !prev);
+    const handleLogout = () => dispatch(logout());
 
     useEffect(() => {
         if (isLoggedIn) {
-            setShowLoginModal(false); // Cierra el modal cuando el usuario se haya logueado
+            setShowLoginModal(false);
+            setShowRegisterModal(false);
         }
     }, [isLoggedIn]);
 
@@ -54,11 +62,27 @@ export default function Header() {
                             Contact
                         </NavLink>
                     </div>
-                    <img src={userIcon} alt="User Icon" className="h-8 w-8 md:h-10 md:w-10 rounded-full mx-2 md:mx-4 mt-4 md:mt-0" />
-                    <AuthButtons onLoginClick={handleLoginModalToggle} /> {/* Incluir AuthButtons */}
+                    {isLoggedIn && user ? (
+                        <div className="flex items-center mt-4 md:mt-0">
+                            <img src={user.photo || userIcon} alt="User Icon" className="h-8 w-8 md:h-10 md:w-10 rounded-full mx-2 md:mx-4" />
+                            <div className="ml-2 md:ml-4">
+                                <span className="text-base md:text-lg">{user.name}</span>
+                                <br />
+                                <span className="text-sm md:text-base">{user.email}</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <AuthButtons onLoginClick={handleLoginModalToggle} onRegisterClick={handleRegisterModalToggle} />
+                    )}
+                    {isLoggedIn && (
+                        <button onClick={handleLogout} className="mt-2 text-sm md:text-base bg-red-600 hover:bg-red-700 text-white p-2 rounded">
+                            Sign Out
+                        </button>
+                    )}
                 </nav>
             </header>
-            {showLoginModal && <LoginForm onClose={handleLoginModalToggle} />} {/* Mostrar LoginForm si showLoginModal es true */}
+            {showLoginModal && <LoginForm onClose={handleLoginModalToggle} />}
+            {showRegisterModal && <RegisterForm onClose={handleRegisterModalToggle} />}
         </>
     );
 }
