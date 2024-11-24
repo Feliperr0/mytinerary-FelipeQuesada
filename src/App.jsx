@@ -11,22 +11,21 @@ import DetailsPage from './Pages/DetailsPage.jsx';
 import { useEffect } from 'react';
 import { checkAuth, setUser } from './store/actions/LogActions';
 
-
 const router = createBrowserRouter([
   {
-    element: <HomeLayout></HomeLayout>,
+    element: <HomeLayout />,
     children: [
-      { path: "/", element: <Home></Home> },
-      { path: "cities", element: <Cities></Cities> },
-      { path: "home", element: <Home></Home> },
-      { path: "details/city/:id", element: <DetailsPage></DetailsPage> }
+      { path: "/", element: <Home /> },
+      { path: "cities", element: <Cities /> },
+      { path: "home", element: <Home /> },
+      { path: "details/city/:id", element: <DetailsPage /> }
     ],
   },
   {
-    element: <CitiesLayout></CitiesLayout>,
+    element: <CitiesLayout />,
     children: [
-      { path: "/", element: <Cities></Cities> },
-      { path: "/*", element: <NotFound></NotFound> }
+      { path: "/", element: <Cities /> },
+      { path: "/*", element: <NotFound /> }
     ]
   },
 ]);
@@ -45,10 +44,8 @@ const loginWithToken = async (token) => {
     return response.data.response
   } catch (error) {
     console.log("error", error)
-
   }
 }
-
 function App() {
 
   const dispatch = useDispatch();
@@ -60,7 +57,16 @@ function App() {
     })
   }
 
-
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const googleToken = params.get("token");
+    if (googleToken) {
+      localStorage.setItem("token", googleToken);
+      loginWithToken(googleToken).then((user) => {
+        dispatch(setUser({ user, googleToken }));
+      });
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -68,15 +74,9 @@ function App() {
 
   return (
     <div className="App">
-
       <RouterProvider router={router} />
     </div>
   );
 }
 
-
-
 export default App;
-
-
-

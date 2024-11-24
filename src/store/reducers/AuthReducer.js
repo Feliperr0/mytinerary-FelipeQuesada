@@ -120,6 +120,7 @@ const authReducer = createReducer(initialState, (builder) => {
         state.token = null;
         state.isLoggedIn = false;
     });
+
     // Agregar casos para login con token
     builder.addCase(loginWithToken.fulfilled, (state, action) => {
         state.loading = false;
@@ -150,11 +151,13 @@ const authReducer = createReducer(initialState, (builder) => {
     });
     // Agregar caso para setUser
     builder.addCase(setUser, (state, action) => {
-     
-        state.user = action.payload.user
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
     });
 });
+
+
+
 
 export default authReducer;
