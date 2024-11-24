@@ -42,7 +42,7 @@ export const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) 
             return thunkAPI.rejectWithValue("Token inválido");
         }
     } else {
-        return thunkAPI.rejectWithValue("No token found");
+        return thunkAPI.rejectWithValue(null);
     }
 });
 
@@ -87,6 +87,6 @@ export const loginWithToken = createAsyncThunk("auth/loginWithToken", async ({ t
 export const setUser = createAction("auth/setUser", (data)=>{
     return {
         payload: data,
-        
+
     }
 })
