@@ -9,6 +9,9 @@ import RegisterForm from './RegisterForm';
 import { logout } from '../store/actions/LogActions';
 
 export default function Header() {
+
+
+
     const location = useLocation();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);

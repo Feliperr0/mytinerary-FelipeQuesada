@@ -1,42 +1,46 @@
 import React from "react";
-import Carousel from "../Components/Carousel";
-import CTA from "../Components/CTA";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export default function Home() {
+import Carousel from "../Components/Carousel";
+import CTA from "../Components/CTA";
+import { setUser } from "../store/actions/LogActions"; // Asegúrate de que esta acción esté correctamente importada
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch ()
+
+export default function Home() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-
-    const params = new URLSearchParams(window.location.search)
-    const token = params.get("token")
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
     if (token) {
-      localStorage.setItem("token", token)
-      loginWithToken(token).then((user) => {
-        dispatch(setUser({ user, token }))
-      })
+      localStorage.setItem("token", token);
+      loginWithToken(token)
+        .then((user) => {
+          dispatch(setUser({ user, token }));
+        })
+        .catch((error) => {
+          console.error("Error logging in with token:", error);
+        })
+        .finally(() => {
+          navigate("/");
+        });
+    } else {
+      navigate("/");
     }
-    navigate("/")
-  }, [dispatch, navigate])
-
-
+  }, [dispatch, navigate]);
   return (
     <>
       <main className="flex flex-col items-center">
         <CTA />
       </main>
-      <section className=" py-10 max-w-screen-xl mx-auto">
+      <section className="py-10 max-w-screen-xl mx-auto">
         <div className="">
           <Carousel />
         </div>
-        
-
       </section>
     </>
   );
 }
-

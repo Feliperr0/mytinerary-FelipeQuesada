@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../store/actions/LogActions';
 
@@ -11,13 +11,6 @@ const RegisterForm = ({ onClose }) => {
     const dispatch = useDispatch();
     const { errorMessage, successMessage } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        // Limpia los mensajes de error y éxito cuando el modal se cierra
-        return () => {
-            dispatch({ type: 'auth/clearMessages' });
-        };
-    }, [dispatch]);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const userData = { name, email, password, photo };
@@ -26,10 +19,10 @@ const RegisterForm = ({ onClose }) => {
             setShowSuccess(true);
             setTimeout(() => {
                 setShowSuccess(false);
-                onClose(); // Cerrar modal después de 3 segundos
-            }, 3000);
+                onClose(); // Cerrar modal después de 5 segundos
+            }, 4000);
         } catch (error) {
-            console.error("Error registering user:", error);
+            console.log("Error registering user:", error);
         }
     };
 
@@ -60,63 +53,63 @@ const RegisterForm = ({ onClose }) => {
                             <p>{errorMessage}</p>
                         )}
                     </div>
-                )}                <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label htmlFor="name" className="block text-yellow-200 mb-2">Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="email" className="block text-yellow-200 mb-2">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="password" className="block text-yellow-200 mb-2">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="photo" className="block text-yellow-200 mb-2">Photo URL:</label>
-                    <input
-                        type="text"
-                        id="photo"
-                        value={photo}
-                        onChange={(e) => setPhoto(e.target.value)}
-                        className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
-                        required
-                    />
-                </div>
-                <button type="submit" className="w-full py-3 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105">Register</button>
-            </form>
-            {successMessage && showSuccess && (
-                <div className="mt-4 text-white">
-                    <p>Name: {name}</p>
-                    <p>Email: {email}</p>
-                </div>
-            )}
+                )}
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label htmlFor="name" className="block text-yellow-200 mb-2">Name:</label>
+                        <input
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block text-yellow-200 mb-2">Email:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block text-yellow-200 mb-2">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="photo" className="block text-yellow-200 mb-2">Photo URL:</label>
+                        <input
+                            type="text"
+                            id="photo"
+                            value={photo}
+                            onChange={(e) => setPhoto(e.target.value)}
+                            className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 ease-in-out"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="w-full py-3 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105">Register</button>
+                </form>
+                {successMessage && showSuccess && (
+                    <div className="mt-4 text-white">
+                        <p>Name: {name}</p>
+                        <p>Email: {email}</p>
+                    </div>
+                )}
+            </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default RegisterForm;
-

@@ -5,6 +5,8 @@ import Card from '../Components/Card';
 import Filters from '../Components/Filters';
 import logo from '../assets/logo.png';
 
+
+
 export default function Cities() {
   const dispatch = useDispatch();
   const citiesData = useSelector(state => state.cities.citiesData);
@@ -12,6 +14,15 @@ export default function Cities() {
   const error = useSelector(state => state.cities.error);
   const searchText = useSelector(state => state.filters.searchText);
   const continentFilter = useSelector(state => state.filters.continentFilter);
+
+
+
+  const params = new URLSearchParams(window.location.search)
+  const token = params.get ("token")
+  if (token) {
+      localStorage.setItem("token",token)
+  }
+  
 
   useEffect(() => {
     dispatch(fetchCities({ searchText, continentFilter }));

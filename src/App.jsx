@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Provider, useDispatch } from 'react-redux';
-import store from './store/store.js';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import './App.css';
 import Home from "./Pages/Home.jsx";
 import Cities from './Pages/Cities.jsx';
@@ -9,8 +9,8 @@ import HomeLayout from "./Layouts/HomeLayout.jsx";
 import CitiesLayout from './Layouts/CitiesLayout.jsx';
 import DetailsPage from './Pages/DetailsPage.jsx';
 import { useEffect } from 'react';
-import { checkAuth } from './store/actions/LogActions';
-import Header from './Components/Header'; // Importar el componente Header
+import { checkAuth, setUser } from './store/actions/LogActions';
+
 
 const router = createBrowserRouter([
   {
@@ -31,10 +31,36 @@ const router = createBrowserRouter([
   },
 ]);
 
+const loginWithToken = async (token) => {
+  try {
+    console.log("se ejecutó login with token");
 
+    const response = await axios.get("http://localhost:8080/api/users/validatetoken",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response.data.response
+  } catch (error) {
+    console.log("error", error)
+
+  }
+}
 
 function App() {
+
   const dispatch = useDispatch();
+
+  let token = localStorage.getItem("token")
+  if (token) {
+    loginWithToken(token).then((user) => {
+      dispatch(setUser({ user, token }))
+    })
+  }
+
+
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -42,18 +68,15 @@ function App() {
 
   return (
     <div className="App">
-      <Header /> {/* Usar Header */}
+
       <RouterProvider router={router} />
     </div>
   );
 }
 
-const AppWrapper = () => (
-  <Provider store={store}>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
-  </Provider>
-);
 
-export default AppWrapper;
+
+export default App;
+
+
+
