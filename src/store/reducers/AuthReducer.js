@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { login, logout, checkAuth, register, loginWithGoogle, loginWithToken, setUser } from "../actions/LogActions";
+import { login, logout, checkAuth, register, loginWithGoogle, loginWithToken, setUser, clearError } from "../actions/LogActions";
 
 const initialState = {
     loading: false,
@@ -156,6 +156,11 @@ const authReducer = createReducer(initialState, (builder) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+    });
+
+    // Agregar caso para clearError
+    builder.addCase(clearError, (state) => {
+        state.errorMessage = null; // Limpiar los mensajes de error
     });
 });
 

@@ -2,20 +2,27 @@ import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axiosInstance from "../../context/axiosConfig";
 
 // Acción para login
-export const login = createAsyncThunk("login", async ({ email, password }) => {
+export const login = createAsyncThunk("login", async ({ email, password }, { rejectWithValue }) => {
     const credentials = {
         email: email,
         password: password
     };
 
-    const response = await axiosInstance.post("http://localhost:8080/api/auth/signin/", credentials);
-    console.log("se proceso la solicitud")
-    console.log("response", response)
+    try {
+        const response = await axiosInstance.post("http://localhost:8080/api/auth/signin/", credentials);
+        console.log("se proceso la solicitud")
+        console.log("response", response)
 
-    localStorage.setItem('token', response.data.token); // Guarda el token en localStorage
-    localStorage.setItem('user', JSON.stringify(response.data.user)); // Guarda los datos del usuario en localStorage
-    return response.data;
-
+        localStorage.setItem('token', response.data.token); // Guarda el token en localStorage
+        localStorage.setItem('user', JSON.stringify(response.data.user)); // Guarda los datos del usuario en localStorage
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data) {
+            return rejectWithValue(error.response.data.message); // Capturar el mensaje de error desde la API
+        } else {
+            return rejectWithValue('Something went wrong');
+        }
+    }
 });
 
 // Acción para logout
@@ -82,9 +89,15 @@ export const loginWithToken = createAsyncThunk("auth/loginWithToken", async ({ t
 export const setUser = createAction("auth/setUser", (data) => {
     return {
         payload: data,
-
     }
 })
+
+// Acción para limpiar mensajes de error
+export const clearError = createAction("auth/clearError");
+
+
+
+
 
 
 

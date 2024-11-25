@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../store/actions/LogActions';
+import { login, clearError } from '../store/actions/LogActions';
 
 const LoginForm = ({ onClose, isModal = true }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
-    
+
     console.log("estado del auth", auth);
 
     const errorMessage = useSelector((state) => state.auth.errorMessage);
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearError()); // Limpiar mensajes de error cuando el componente se desmonta o el modal se cierra
+        };
+    }, [dispatch]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
