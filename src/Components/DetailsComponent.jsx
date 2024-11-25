@@ -9,12 +9,24 @@ export default function DetailsComponent() {
   const dispatch = useDispatch();
   const city = useSelector(state => state.details.city);
   const loading = useSelector(state => state.details.loading);
-  const error = useSelector(state => state.details.error);
+
   const errorMessage = useSelector(state => state.details.errorMessage);
+  const token = useSelector(state => state.auth.token); // Obtener el token del estado
 
   useEffect(() => {
-    dispatch(fetchCityDetails(id));
-  }, [dispatch, id]);
+    const verifyTokenAndFetchDetails = () => {
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
+        dispatch(fetchCityDetails(id));
+      } else {
+        console.error('No token found');
+      }
+    };
+
+    if (token) {
+      verifyTokenAndFetchDetails();
+    }
+  }, [dispatch, id, token]);
 
   if (loading) {
     return (
@@ -23,7 +35,7 @@ export default function DetailsComponent() {
       </div>
     );
   }
-  if (error || !city) {
+  if ( !city) {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-gray-900 bg-opacity-70">
         <p className="text-white text-2xl mb-4">{errorMessage}</p>
@@ -53,3 +65,4 @@ export default function DetailsComponent() {
     </div>
   );
 }
+

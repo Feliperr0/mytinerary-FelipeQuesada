@@ -143,7 +143,7 @@ const authReducer = createReducer(initialState, (builder) => {
     builder.addCase(loginWithToken.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
-        state.errorMessage = action.payload.message;
+        state.errorMessage = action.payload;
         state.successMessage = null;
         state.user = null;
         state.token = null;
@@ -151,13 +151,12 @@ const authReducer = createReducer(initialState, (builder) => {
     });
     // Agregar caso para setUser
     builder.addCase(setUser, (state, action) => {
+        console.log("es correcto el setUser");
+        
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
     });
 });
-
-
-
 
 export default authReducer;

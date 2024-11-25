@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PriceRating from './PriceRating';
 import LikeButtonCount from './LikeButtonCount';
+import axios from 'axios';
 
 export default function ItinerariesBox() {
   const { id } = useParams();
@@ -13,17 +14,22 @@ export default function ItinerariesBox() {
 
   useEffect(() => {
     const fetchCity = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/cities/id/${id}`);
-        const data = await response.json();
+      const token = localStorage.getItem('token');
 
-        if (response.ok) {
-          setCity(data);
+      try {
+        const response = await axios.get(`http://localhost:8080/api/cities/id/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        if (response.status === 200) {
+          setCity(response.data);
         } else {
-          setError(data.message);
+          setError(response.data.message);
         }
       } catch (error) {
-        setError(data.message);
+        setError('Network error');
       } finally {
         setLoading(false);
       }

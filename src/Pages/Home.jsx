@@ -9,28 +9,7 @@ import { setUser } from "../store/actions/LogActions"; // Asegúrate de que esta
 
 
 export default function Home() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    if (token) {
-      localStorage.setItem("token", token);
-      loginWithToken(token)
-        .then((user) => {
-          dispatch(setUser({ user, token }));
-        })
-        .catch((error) => {
-          console.error("Error logging in with token:", error);
-        })
-        .finally(() => {
-          navigate("/");
-        });
-    } else {
-      navigate("/");
-    }
-  }, [dispatch, navigate]);
+  
   return (
     <>
       <main className="flex flex-col items-center">

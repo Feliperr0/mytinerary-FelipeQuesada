@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/actions/LogActions';
 
-const LoginForm = ({ onClose }) => {
+const LoginForm = ({ onClose, isModal = true }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const auth = useSelector((state) => state.auth); // Ajuste del selector al nombre correcto del estado
+    const auth = useSelector((state) => state.auth);
     
     console.log("estado del auth", auth);
 
@@ -18,17 +18,20 @@ const LoginForm = ({ onClose }) => {
     };
 
     const loginWithGoogle = () => {
-        window.location.href = "http://localhost:8080/api/auth/signin/google"; // URL para la autenticación con Google
+        window.location.href = "http://localhost:8080/api/auth/signin/google";
     };
+
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-gray-800 rounded-lg shadow-lg border border-yellow-500 w-full max-w-md p-8 transition-all duration-300 ease-in-out transform hover:scale-105">
-                <button
-                    onClick={onClose}
-                    className="absolute top-2 right-2 text-gray-200 hover:text-gray-400 text-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                >
-                    &times;
-                </button>
+        <div className={`${isModal ? 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50' : 'w-full max-w-md mx-auto'}`}>
+            <div className={`relative bg-gray-800 rounded-lg shadow-lg border border-yellow-500 p-8 ${isModal ? 'transform hover:scale-105' : 'mx-4 my-8'}`}>
+                {isModal && (
+                    <button
+                        onClick={onClose}
+                        className="absolute top-2 right-2 text-gray-200 hover:text-gray-400 text-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    >
+                        &times;
+                    </button>
+                )}
                 <h2 className="text-2xl font-bold text-center text-yellow-400 mb-6">Login</h2>
                 {errorMessage && (
                     <div className="bg-red-500 text-white p-2 rounded mb-4">

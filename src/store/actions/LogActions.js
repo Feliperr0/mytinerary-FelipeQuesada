@@ -30,11 +30,6 @@ export const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) 
     const user = JSON.parse(localStorage.getItem('user'));
     if (token && user) {
         try {
-            // Aquí podrías realizar una solicitud para verificar el token
-            // const response = await axiosInstance.get("/auth/checkToken", {
-            //     headers: { Authorization: `Bearer ${token}` }
-            // });
-            // Supongamos que la respuesta es exitosa
             return { user, token }; // Cargar los datos del usuario desde localStorage
         } catch (error) {
             localStorage.removeItem('token');
@@ -84,9 +79,12 @@ export const loginWithToken = createAsyncThunk("auth/loginWithToken", async ({ t
 });
 
 // Acción para establecer el usuario manualmente
-export const setUser = createAction("auth/setUser", (data)=>{
+export const setUser = createAction("auth/setUser", (data) => {
     return {
         payload: data,
 
     }
 })
+
+
+
