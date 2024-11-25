@@ -7,23 +7,22 @@ export default function Filters() {
   const searchText = useSelector(state => state.filters.searchText);
   const continentFilter = useSelector(state => state.filters.continentFilter);
 
-  const handleContinentChange = (event) => {
-    const { value, checked } = event.target;
-    console.log("Continent Change - Value:", value, "Checked:", checked);
+  const handleSearchChange = (e) => {
+    dispatch(setSearchText(e.target.value));
+  };
+
+  const handleContinentChange = (e) => {
+    const { value, checked } = e.target;
     dispatch(setContinentFilter({ value, checked }));
   };
 
   return (
     <div className="filters mb-4 w-11/12 mx-auto bg-gray-800 bg-opacity-50 rounded-lg p-6">
-      <input 
+      <input
         type="text"
         placeholder="Search by country..."
         value={searchText}
-        onChange={e => {
-          console.log("Search Text Change:", e.target.value); // ya funciona! yayyy!
-          
-          dispatch(setSearchText(e.target.value));
-        }}
+        onChange={handleSearchChange}
         className="w-full p-3 mb-4 text-xl font-bold text-black text-center bg-opacity-80 rounded-lg border-2 border-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
       />
       <div className="continent-filters flex flex-wrap justify-center">
