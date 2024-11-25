@@ -20,7 +20,7 @@ export const login = createAsyncThunk("login", async ({ email, password }, { rej
         if (error.response && error.response.data) {
             return rejectWithValue(error.response.data.message); // Capturar el mensaje de error desde la API
         } else {
-            return rejectWithValue('Something went wrong');
+            return rejectWithValue(error);
         }
     }
 });
