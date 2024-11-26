@@ -29,7 +29,7 @@ export default function Cities() {
 
   const params = new URLSearchParams(window.location.search);
   const token = params.get('token');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
@@ -48,9 +48,9 @@ export default function Cities() {
           dispatch(setUser({ user, token: storedToken }));
         });
       }
-    } navigate('/cities')
+    }
+    navigate('/cities');
   }, [dispatch]);
-
 
   const citiesData = useSelector(state => state.cities.citiesData);
   const searchText = useSelector(state => state.filters.searchText);
@@ -64,10 +64,12 @@ export default function Cities() {
 
   if (!isLoggedIn) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-blue-500 text-white p-4">
-        <h1 className="text-3xl font-bold mb-4">Please log in</h1>
-        <p className="text-xl mb-4">Sign in to discover itineraries shared by other adventurers for you</p>
-        <LoginForm isModal={false} />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 bg-wow-background bg-cover bg-center">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-70 text-white p-8 rounded-lg border-4 border-yellow-500 shadow-2xl">
+          <h1 className="text-5xl font-extrabold text-yellow-400 mb-4 glow-text">Please log in</h1>
+          <p className="text-2xl mb-4">Sign in to discover itineraries shared by other adventurers for you</p>
+          <LoginForm isModal={false} />
+        </div>
       </div>
     );
   }
