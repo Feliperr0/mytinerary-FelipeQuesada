@@ -1,23 +1,23 @@
 import React from "react";
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import DetailsComponent from "../Components/DetailsComponent";
 import Carousel from "../Components/Carousel";
 import { NavLink } from 'react-router-dom';
 import ItinerariesBox from "../Components/ItinerariesBox";
 import LoginForm from '../Components/LoginForm';
 
-
 export default function DetailsPage() {
 
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
-
   if (!isLoggedIn) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-blue-500 text-white p-4">
-        <h1 className="text-3xl font-bold mb-4">Please log in</h1>
-        <p className="text-xl mb-4">Sign in to access detailed itineraries and more!</p>
-        <LoginForm isModal={false} /> 
+      <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 bg-wow-background bg-cover bg-center">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-70 text-white p-8 rounded-lg border-4 border-yellow-500 shadow-2xl">
+          <h1 className="text-5xl font-extrabold text-yellow-400 mb-4 glow-text">Please log in</h1>
+          <p className="text-2xl mb-4">Sign in to access detailed itineraries and more!</p>
+          <LoginForm isModal={false} />
+        </div>
       </div>
     );
   }
