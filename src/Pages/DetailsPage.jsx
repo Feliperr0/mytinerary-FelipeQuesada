@@ -28,7 +28,7 @@ export default function DetailsPage() {
         <DetailsComponent />
         <ItinerariesBox />
         
-        <NavLink to="/cities" className="inline-block m-6 bg-blue-500 text-white py-2 px-4 rounded-full text-lg hover:bg-blue-600 sm:py-3 sm:px-6 sm:text-xl">
+        <NavLink to="/cities" className="inline-block m-6 bg-red-600 text-white py-2 px-4 rounded-full text-lg hover:bg-red-800 sm:py-3 sm:px-6 sm:text-xl">
           Go back to discover wonderful cities!
         </NavLink>
       </main>
