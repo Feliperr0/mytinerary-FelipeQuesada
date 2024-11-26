@@ -9,7 +9,7 @@ import HomeLayout from "./Layouts/HomeLayout.jsx";
 import CitiesLayout from './Layouts/CitiesLayout.jsx';
 import DetailsPage from './Pages/DetailsPage.jsx';
 import { useEffect } from 'react';
-import { checkAuth, setUser } from './store/actions/LogActions';
+import {  setUser } from './store/actions/LogActions';
 
 const router = createBrowserRouter([
   {
@@ -50,27 +50,21 @@ function App() {
 
   const dispatch = useDispatch();
 
-  let token = localStorage.getItem("token")
-  if (token) {
-    loginWithToken(token).then((user) => {
-      dispatch(setUser({ user, token }))
-    })
-  }
+
+
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const googleToken = params.get("token");
-    if (googleToken) {
-      localStorage.setItem("token", googleToken);
-      loginWithToken(googleToken).then((user) => {
-        dispatch(setUser({ user, googleToken }));
-      });
+
+    let token = localStorage.getItem("token")
+    if (token) {
+      loginWithToken(token).then((user) => {
+        dispatch(setUser({ user, token }))
+      })
     }
+
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
+
 
   return (
     <div className="App">

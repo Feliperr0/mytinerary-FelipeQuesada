@@ -10,8 +10,6 @@ import { logout } from '../store/actions/LogActions';
 
 export default function Header() {
 
-
-
     const location = useLocation();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
@@ -23,6 +21,8 @@ export default function Header() {
     const handleLoginModalToggle = () => setShowLoginModal(prev => !prev);
     const handleRegisterModalToggle = () => setShowRegisterModal(prev => !prev);
     const handleLogout = () => dispatch(logout());
+
+    
 
     useEffect(() => {
         if (isLoggedIn) {

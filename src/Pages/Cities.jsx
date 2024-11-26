@@ -4,11 +4,13 @@ import Card from '../Components/Card';
 import Filters from '../Components/Filters';
 import logo from '../assets/logo.png';
 import LoginForm from '../Components/LoginForm';
-import { checkAuth, loginWithToken } from '../store/actions/LogActions';
+import { setUser } from '../store/actions/LogActions';
 import { fetchCities } from '../store/actions/CitiesActions';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const loginWithTokenLocal = async (token) => {
+// Función para validar el token con Google
+const loginWithTokenGoogle = async (token) => {
   try {
     console.log("se ejecutó login with token");
 
@@ -24,44 +26,32 @@ const loginWithTokenLocal = async (token) => {
 }
 
 export default function Cities() {
+
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
+    if (token) {
+      localStorage.setItem('token', token);
 
-    if (storedToken && storedUser) {
-      dispatch(loginWithToken({ token: storedToken, user: JSON.parse(storedUser) }))
-        .then(() => {
-          dispatch(checkAuth());
-        });
+      loginWithTokenGoogle(token).then((user) => {
+        dispatch(setUser({ user, token }));
+      });
     } else {
-      const params = new URLSearchParams(window.location.search);
-      const token = params.get('token');
-      const user = params.get('user');
 
-      if (token && user) {
-        loginWithTokenLocal(token)
-          .then((data) => {
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', user);
-            dispatch(loginWithToken({ token, user: JSON.parse(user) }))
-              .then(() => {
-                // Limpiar URL después de capturar el token
-                const url = window.location.href.split('?')[0];
-                window.history.replaceState({}, document.title, url);
-                dispatch(checkAuth());
-              });
-          })
-          .catch(error => {
-            console.error("Error logging in with token:", error);
-          });
-      } else {
-        dispatch(checkAuth());
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
+        loginWithTokenGoogle(storedToken).then((user) => {
+          dispatch(setUser({ user, token: storedToken }));
+        });
       }
-    }
+    } navigate('/cities')
   }, [dispatch]);
+
+
   const citiesData = useSelector(state => state.cities.citiesData);
   const searchText = useSelector(state => state.filters.searchText);
   const continentFilter = useSelector(state => state.filters.continentFilter);
@@ -77,7 +67,7 @@ export default function Cities() {
       <div className="flex flex-col items-center justify-center min-h-screen bg-blue-500 text-white p-4">
         <h1 className="text-3xl font-bold mb-4">Please log in</h1>
         <p className="text-xl mb-4">Sign in to discover itineraries shared by other adventurers for you</p>
-        <LoginForm isModal={false} /> {/* Renderizado como formulario regular */}
+        <LoginForm isModal={false} />
       </div>
     );
   }

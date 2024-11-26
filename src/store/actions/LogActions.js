@@ -34,13 +34,13 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 // Acción para verificar autenticación al cargar la aplicación
 export const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
     const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (token && user) {
+
+    if (token) {
         try {
-            return { user, token }; // Cargar los datos del usuario desde localStorage
+            return { token }; // Cargar los datos del usuario desde localStorage
         } catch (error) {
             localStorage.removeItem('token');
-            localStorage.removeItem('user');
+
             return thunkAPI.rejectWithValue("Token inválido");
         }
     } else {
@@ -63,7 +63,7 @@ export const register = createAsyncThunk("auth/register", async (userData, thunk
 export const loginWithGoogle = createAsyncThunk("auth/loginWithGoogle", async (_, thunkAPI) => {
     try {
         const response = await axiosInstance.get('/auth/signin/google'); // Verifica si esta URL es correcta según tu configuración de backend
-        // Aquí suponemos que el backend redirige a una ruta con el token y los datos del usuario.
+       
         const { token, user } = response.data; // Ajusta esto según tu backend
         localStorage.setItem('token', token); // Guarda el token en localStorage
         localStorage.setItem('user', JSON.stringify(user)); // Guarda los datos del usuario en localStorage
@@ -74,25 +74,25 @@ export const loginWithGoogle = createAsyncThunk("auth/loginWithGoogle", async (_
     }
 });
 
-// Acción para login con token devuelto por Google
-export const loginWithToken = createAsyncThunk("auth/loginWithToken", async ({ token, user }, thunkAPI) => {
+// login con token devuelto por Google
+export const loginWithToken = createAsyncThunk("auth/loginWithToken", async ({ token }, thunkAPI) => {
     try {
         localStorage.setItem('token', token); // Guarda el token en localStorage
-        localStorage.setItem('user', JSON.stringify(user)); // Guarda los datos del usuario en localStorage
-        return { token, user };
+        // Guarda los datos del usuario en localStorage
+        return { token };
     } catch (error) {
         return thunkAPI.rejectWithValue("Error storing token");
     }
 });
 
-// Acción para establecer el usuario manualmente
+// establecer el usuario manualmente
 export const setUser = createAction("auth/setUser", (data) => {
     return {
         payload: data,
     }
 })
 
-// Acción para limpiar mensajes de error
+// limpiar mensajes de error
 export const clearError = createAction("auth/clearError");
 
 

@@ -14,7 +14,7 @@ const LoginForm = ({ onClose, isModal = true }) => {
 
     useEffect(() => {
         return () => {
-            dispatch(clearError()); // Limpiar mensajes de error cuando el componente se desmonta o el modal se cierra
+            dispatch(clearError()); // Limpia mensajes de error cuando el componente se desmonta o el modal se cierra (antes persistia entre modales, sepa por qué jaja)
         };
     }, [dispatch]);
 
@@ -23,8 +23,11 @@ const LoginForm = ({ onClose, isModal = true }) => {
         dispatch(login({ email, password }));
     };
 
+
     const loginWithGoogle = () => {
+        console.log("se ejecuta login");
         window.location.href = "http://localhost:8080/api/auth/signin/google";
+
     };
 
     return (
