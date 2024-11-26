@@ -10,13 +10,13 @@ const AuthButtons = ({ onLoginClick, onRegisterClick }) => {
                 <>
                     <button
                         onClick={onLoginClick}
-                        className="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+                        className="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-extrabold rounded-full shadow-2xl transform hover:scale-110 transition-transform duration-300 ease-in-out border-2 border-yellow-700"
                     >
                         Sign In
                     </button>
                     <button
                         onClick={onRegisterClick}
-                        className="px-6 py-2 bg-red-500 hover:bg-red-800 text-white font-bold rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+                        className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-full shadow-2xl transform hover:scale-110 transition-transform duration-300 ease-in-out border-2 border-red-800"
                     >
                         Register
                     </button>
@@ -27,3 +27,4 @@ const AuthButtons = ({ onLoginClick, onRegisterClick }) => {
 };
 
 export default AuthButtons;
+

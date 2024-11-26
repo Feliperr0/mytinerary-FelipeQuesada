@@ -58,14 +58,14 @@ export default function ItinerariesBox() {
   }
 
   return (
-    <div className="bg-gray-800 bg-opacity-90 w-11/12 mx-auto p-6 rounded-lg shadow-2xl transition-all duration-500">
-      <h1 className="text-4xl font-extrabold text-yellow-400 text-center mb-6">Itineraries</h1>
+    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-black bg-opacity-90 w-11/12 mx-auto p-6 rounded-lg shadow-2xl transition-all duration-500 border-4 border-yellow-500">
+      <h1 className="text-4xl font-extrabold text-yellow-400 text-center mb-6 drop-shadow-lg">Itineraries</h1>
       <div className="flex flex-wrap justify-center gap-6">
         {city.itinerary.length > 0 ? (
           city.itinerary.map(itinerary => (
-            <div key={itinerary._id} className="flex flex-col items-center bg-gray-700 bg-opacity-90 p-6 rounded-lg shadow-lg hover:scale-105 hover:bg-blue-600 transition-transform duration-300 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
+            <div key={itinerary._id} className="flex flex-col items-center bg-gray-700 bg-opacity-90 p-6 rounded-lg shadow-lg hover:scale-105 hover:bg-blue-600 transition-transform duration-300 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 border-2 border-yellow-400">
               <h3 className="text-2xl font-bold text-center text-yellow-400">{itinerary.accountName}</h3>
-              <img src={itinerary.photo} alt={itinerary.accountName} className="w-24 h-24 object-cover rounded-full mb-4 mx-auto border-4 border-yellow-400" />
+              <img src={itinerary.photo} alt={itinerary.accountName} className="w-24 h-24 object-cover rounded-full mb-4 mx-auto border-4 border-yellow-500 shadow-lg" />
               <div className="text-center text-yellow-300">
                 <p>Price Rate</p>
                 <PriceRating price={itinerary.price} />
