@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { toggleDetails, toggleLoading } from '../store/actions/CardActions';
+import { toggleLoading } from '../store/actions/CardActions';
 
 export default function Card({ city }) {
   const dispatch = useDispatch();
-  const details = useSelector(state => state.card.details);
   const loading = useSelector(state => state.card.loading);
+  const [details, setDetails] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,7 +16,7 @@ export default function Card({ city }) {
   }, [dispatch]);
 
   function handleClickDetails() {
-    dispatch(toggleDetails());
+    setDetails(prevDetails => !prevDetails);
   }
 
   return (
