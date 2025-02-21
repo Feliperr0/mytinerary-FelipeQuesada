@@ -74,7 +74,7 @@ export default function Cities() {
     );
   }
   return (
-    <div className="container mx-auto w-full text-center p-2">
+    <div className="container mx-auto w-full text-center p-4">
       <h1 className="text-3xl font-bold mb-4">Cities</h1>
       <Filters />
       <div className="cards-container flex flex-wrap justify-center rounded-2xl bg-black p-4">

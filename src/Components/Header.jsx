@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import userIcon from '../assets/usericon.jpg';
+import userIcon from '../assets/360_F_261902858_onbxqSHf193X4w7e8fdRH8vjjoT3vOVZ.jpg';
 import AuthButtons from './AuthButtons';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
