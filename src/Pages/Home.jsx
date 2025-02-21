@@ -7,16 +7,18 @@ import Carousel from "../Components/Carousel";
 import CTA from "../Components/CTA";
 import { setUser } from "../store/actions/LogActions"; // Asegúrate de que esta acción esté correctamente importada
 
-
 export default function Home() {
   
   return (
     <>
       <main className="flex flex-col items-center">
-        <CTA />
+        {/* Otros contenidos del main */}
       </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
+      <div className="flex justify-center items-center min-h-screen overflow-hidden">
+        <CTA />
+      </div>
+      <section className="py-10 max-w-screen-xl mx-auto overflow-hidden">
+        <div className="flex justify-center">
           <Carousel />
         </div>
       </section>
