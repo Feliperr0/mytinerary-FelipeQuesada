@@ -12,16 +12,16 @@ import { useNavigate } from 'react-router-dom';
 // Función para validar el token con Google
 const loginWithTokenGoogle = async (token) => {
   try {
-    console.log("se ejecutó login with token");
+ 
 
-    const response = await axios.get("http://localhost:8080/api/users/validatetoken", {
+    const response = await axios.get("https://mytinerary-back-felipequesada-production.up.railway.app/api/users/validatetoken", {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
     return response.data.response;
   } catch (error) {
-    console.log("error", error);
+  
   }
 }
 

@@ -7,7 +7,7 @@ export default function ContinentFilter({ continentFilter, setContinentFilter })
 
     const fetchContinents = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/cities/all');
+        const response = await fetch('https://mytinerary-back-felipequesada-production.up.railway.app/api/cities/all');
         const data = await response.json();
         const cities = data.cities;
 

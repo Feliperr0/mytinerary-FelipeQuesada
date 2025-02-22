@@ -9,9 +9,8 @@ export const login = createAsyncThunk("login", async ({ email, password }, { rej
     };
 
     try {
-        const response = await axiosInstance.post("http://localhost:8080/api/auth/signin/", credentials);
-        console.log("se proceso la solicitud")
-        console.log("response", response)
+        const response = await axiosInstance.post("https://mytinerary-back-felipequesada-production.up.railway.app/api/auth/signin/", credentials);
+   
 
         localStorage.setItem('token', response.data.token); // Guarda el token en localStorage
         localStorage.setItem('user', JSON.stringify(response.data.user)); // Guarda los datos del usuario en localStorage

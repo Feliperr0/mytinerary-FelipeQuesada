@@ -6,7 +6,7 @@ export const fetchCityDetails = createAsyncThunk('GET_CITY_DETAILS', async (id, 
   const token = state.auth.token; // Obtener el token del estado de autenticación
 
   try {
-    const response = await axios.get(`http://localhost:8080/api/cities/id/${id}`, {
+    const response = await axios.get(`https://mytinerary-back-felipequesada-production.up.railway.app/api/cities/id/${id}`, {
       headers: {
         Authorization: `Bearer ${token}` // Incluir el token en los encabezados de la solicitud
       }

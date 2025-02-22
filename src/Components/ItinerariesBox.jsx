@@ -17,7 +17,7 @@ export default function ItinerariesBox() {
       const token = localStorage.getItem('token');
 
       try {
-        const response = await axios.get(`http://localhost:8080/api/cities/id/${id}`, {
+        const response = await axios.get(`https://mytinerary-back-felipequesada-production.up.railway.app/api/cities/id/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

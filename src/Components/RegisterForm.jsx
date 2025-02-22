@@ -22,7 +22,7 @@ const RegisterForm = ({ onClose }) => {
                 onClose(); // Cerrar modal después de 5 segundos
             }, 4000);
         } catch (error) {
-            console.log("Error registering user:", error);
+    
         }
     };
 

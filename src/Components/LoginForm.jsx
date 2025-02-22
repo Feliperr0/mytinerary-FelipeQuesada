@@ -8,7 +8,7 @@ const LoginForm = ({ onClose, isModal = true }) => {
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
 
-    console.log("estado del auth", auth);
+
 
     const errorMessage = useSelector((state) => state.auth.errorMessage);
 
@@ -25,8 +25,8 @@ const LoginForm = ({ onClose, isModal = true }) => {
 
 
     const loginWithGoogle = () => {
-        console.log("se ejecuta login");
-        window.location.href = "http://localhost:8080/api/auth/signin/google";
+       
+        window.location.href = "https://mytinerary-back-felipequesada-production.up.railway.app/api/auth/signin/google";
 
     };
 

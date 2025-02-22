@@ -24,7 +24,7 @@ export default function Header() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            console.log(user); // Verifica las propiedades del objeto user
+            
             setShowLoginModal(false);
             setShowRegisterModal(false);
         }

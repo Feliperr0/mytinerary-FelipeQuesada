@@ -13,8 +13,8 @@ const initialState = {
 
 const authReducer = createReducer(initialState, (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-        console.log("se ejecuto correctamente")
-        console.log(action)
+ 
+       
         state.loading = false;
         state.error = false;
         state.errorMessage = null;
@@ -24,8 +24,8 @@ const authReducer = createReducer(initialState, (builder) => {
         state.isLoggedIn = true;
     });
     builder.addCase(login.pending, (state) => {
-        console.log("se inicio correctamente")
-        console.log(state)
+
+       
         state.loading = true;
         state.error = false;
         state.errorMessage = null;
@@ -35,8 +35,8 @@ const authReducer = createReducer(initialState, (builder) => {
         state.isLoggedIn = false;
     });
     builder.addCase(login.rejected, (state, action) => {
-        console.log("error en el signin")
-        console.log(action)
+     
+      
         state.loading = false;
         state.error = true;
         state.errorMessage = action.payload;
@@ -46,7 +46,7 @@ const authReducer = createReducer(initialState, (builder) => {
         state.isLoggedIn = false;
     });
     builder.addCase(logout.fulfilled, (state) => {
-        console.log("cerrado sesión")
+     
         state.loading = false;
         state.error = false;
         state.errorMessage = null;
@@ -151,7 +151,7 @@ const authReducer = createReducer(initialState, (builder) => {
     });
     // Agregar caso para setUser
     builder.addCase(setUser, (state, action) => {
-        console.log("es correcto el setUser");
+  
         
         state.user = action.payload.user;
         state.token = action.payload.token;

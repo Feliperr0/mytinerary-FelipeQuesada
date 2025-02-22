@@ -15,7 +15,7 @@ export const fetchCitiesWithFilters = createAsyncThunk('GET_CITIES_FILTERED', as
     continentFilter.forEach(continent => query.append('continent', continent));
   }
 
-  const response = await fetch(`http://localhost:8080/api/cities/find?${query.toString()}`);
+  const response = await fetch(`https://mytinerary-back-felipequesada-production.up.railway.app/api/cities/find?${query.toString()}`);
   const data = await response.json();
   return data.cities;
 });

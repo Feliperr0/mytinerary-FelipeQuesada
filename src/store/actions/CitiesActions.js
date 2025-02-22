@@ -19,7 +19,7 @@ export const fetchCities = createAsyncThunk('GET_CITIES', async ({ searchText, c
     'Authorization': `Bearer ${token}`
   };
 
-  const response = await fetch(`http://localhost:8080/api/cities/find?${query.toString()}`, {
+  const response = await fetch(`https://mytinerary-back-felipequesada-production.up.railway.app/api/cities/find?${query.toString()}`, {
     method: 'GET',
     headers: headers
   });

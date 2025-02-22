@@ -44,7 +44,7 @@ export default function Carousel() {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const cities = await fetch('http://localhost:8080/api/cities/all');
+        const cities = await fetch('https://mytinerary-back-felipequesada-production.up.railway.app/api/cities/all');
         const data = await cities.json();
  
         setCities(Array.isArray(data.cities) ? data.cities : []);
